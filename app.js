@@ -2,22 +2,16 @@ var  express        = require("express")
    , app            = express()
    , bodyParser     = require("body-parser");
 
+const path = require("path");
 
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(__dirname+"/public"));
 app.use(bodyParser.json({limit: "50mb"}));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
-
-app.get(['/home','/','/landing'],function(req,res){
-  res.send('hello');
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-
-
-
-// app.listen(7000,function(){
-//      console.log("clinby");
-// });
 
 const port  = process.env.PORT||7000;
 app.listen(port,process.env.IP,function(){
