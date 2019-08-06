@@ -9,7 +9,7 @@ app.use(bodyParser.json({limit: "50mb"}));
 
 
 app.get(['/home','/','/landing'],function(req,res){
-  res.send('<h1>welcome</h1>');
+  res.send('hello');
 });
 
 
