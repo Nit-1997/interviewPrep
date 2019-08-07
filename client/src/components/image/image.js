@@ -1,12 +1,12 @@
 import React from 'react';
-import amazon from '../assets/amzon.png';
-import google from '../assets/google.png';
-import microsoft from '../assets/microsoft.png';
-import intuit from '../assets/intuit.png';
-import adobe from '../assets/adobe.png';
-import cisco from '../assets/cisco.jpeg';
-import fb from '../assets/fb.png';
-import walmart from '../assets/walmart.jpeg';
+import amazon from '../../assets/amzon.png';
+import google from '../../assets/google.png';
+import microsoft from '../../assets/microsoft.png';
+import intuit from '../../assets/intuit.png';
+import adobe from '../../assets/adobe.png';
+import cisco from '../../assets/cisco.jpeg';
+import fb from '../../assets/fb.png';
+import walmart from '../../assets/walmart.jpeg';
 import { Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
 
 const image = () =>(
@@ -44,7 +44,7 @@ const image = () =>(
           Want to ace the technical interviews?
         </p>
        
-       <Button  variant="primary">sign up</Button>
+       <Button  variant="primary">View Courses</Button>
       </Container>
 );
 
