@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import amazon from '../../assets/amzon.png';
 import google from '../../assets/google.png';
 import microsoft from '../../assets/microsoft.png';
@@ -7,10 +7,31 @@ import adobe from '../../assets/adobe.png';
 import cisco from '../../assets/cisco.jpeg';
 import fb from '../../assets/fb.png';
 import walmart from '../../assets/walmart.jpeg';
-import { Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
+import { Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
-const image = () =>(
-   <Container>
+
+
+class Imager extends Component{
+  render(){
+      let button;
+      if(this.props.loggedIn){
+            button= ( 
+                  <NavLink 
+                     to='/about'
+                  >
+                  <Button  variant="primary">View Courses</Button>
+                  </NavLink>
+              );            
+      }else{
+          button= ( 
+                  <Button  variant="primary" disabled>View Courses</Button>
+              );  
+      }
+
+     return(
+       <Container>
         <Row>
           <Col xs={6} md={3}>
             <Image src={fb} roundedCircle thumbnail fluid/>
@@ -43,10 +64,12 @@ const image = () =>(
         <p>
           Want to ace the technical interviews?
         </p>
-       
-       <Button  variant="primary">View Courses</Button>
+         {button}
       </Container>
-);
+     );
+  }   
+}
+   
 
 
-export default image;
+export default withRouter(Imager);

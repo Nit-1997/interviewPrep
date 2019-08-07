@@ -1,3 +1,9 @@
 a{
 	color:white;
 }
+
+.alert{
+	margin-top: 32px;
+	margin-bottom: 0px;
+	text-align: center;
+}

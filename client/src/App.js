@@ -1,27 +1,68 @@
 import React, { Component } from 'react';
-import Header from './components/header/header';
 import {Container,Button} from 'react-bootstrap';
 import {Route,Switch} from 'react-router-dom';
 import Landing from './containers/landing/landing';
 import Signup from './containers/signup/signup';
 import Login from './containers/login/login';
 import About from './containers/about/about';
+import Header from './components/header/header';
 import axios from 'axios';
 
 
 class App extends Component {
- state = {
-  };
+ constructor() {
+    super()
+    this.state = {
+      loggedIn: false,
+      username: null
+    }
+
+    this.getUser = this.getUser.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+  }
+
+  componentDidMount() {
+    this.getUser()
+  }
+
+  updateUser (userObject) {
+    this.setState(userObject)
+  }
+
+  getUser() {
+    axios.get('/').then(response => {
+      console.log('Get user response: ')
+      console.log(response.data)
+      if (response.data.user) {
+        console.log('Get User: There is a user saved in the server session: ')
+
+        this.setState({
+          loggedIn: true,
+          username: response.data.user.username
+        })
+      } else {
+        console.log('Get user: no user');
+        this.setState({
+          loggedIn: false,
+          username: null
+        })
+      }
+    })
+  }
+
+
+
   render() {
     return (
        <div className="App">
-         <Header/>
+       <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn}/>
          <header>
            <Switch>
-            <Route path="/" exact component = {Landing}/>
-            <Route path="/about" component = {About}/>
-            <Route path="/signup" component = {Signup}/>
-            <Route path="/login" component = {Login}/>
+              <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
+              <Route path="/about" render={() => <About/>}/>
+              <Route path="/signup" render={() => <Signup/>}/>
+              <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
            </Switch>
          </header>
        </div>

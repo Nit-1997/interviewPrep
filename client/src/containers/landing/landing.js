@@ -1,17 +1,24 @@
 import Image from '../../components/image/image';
 import './landing.css';
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 
-class App extends Component {
+class Landing extends Component {
  state = {
+ 	isLoggedIn:this.props.loggedIn
   };
-  render() {
+
+
+  render() { 
+    console.log(this.props);
     return (
+     <div>
       <div className="App-header">
-       <Image/>
+       <Image loggedIn={this.state.isLoggedIn}/>
       </div>
+     </div> 
     );
   }
 }
 
-export default App;
+export default withRouter(Landing);

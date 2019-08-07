@@ -1,17 +1,17 @@
 import './login.css';
 import React, { Component } from 'react';
 import Signin from '../../components/login/login';
+import {withRouter} from 'react-router-dom';
 
-class Login extends Component {
- state = {
-  };
-  render() {
+const login = (props) =>{
+	console.log(props);
     return (
       <div className="master">
-         <Signin/>
+         <Signin
+            {...props} 
+         />
       </div>
     );
   }
-}
 
-export default Login;
+export default withRouter(login);

@@ -1,17 +1,17 @@
 import './signup.css';
-import React, { Component } from 'react';
+import React from 'react';
 import Register from '../../components/signup/signup';
+import {withRouter} from 'react-router-dom';
 
-class Signup extends Component {
- state = {
-  };
-  render() {
+const signup =(props)=> {
+    console.log(props);
     return (
       <div className="master">
-         <Register/>
+         <Register 
+             {...props} 
+          />
       </div>
     );
-  }
-}
+ }
 
-export default Signup;
+export default withRouter(signup);
