@@ -13,7 +13,6 @@ class Courses extends Component {
  	  isLoggedIn:this.props.loggedIn
   }
   componentDidMount(){
-  
   axios.get('/getCourses')
     .then(response => {
       this.setState({courses:response.data},()=>{
