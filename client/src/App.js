@@ -6,6 +6,7 @@ import Signup from './containers/signup/signup';
 import Courses from './containers/courses/courses';
 import Login from './containers/login/login';
 import About from './containers/about/about';
+import Create from './containers/create/create';
 import Header from './components/header/header';
 import axios from 'axios';
 
@@ -57,7 +58,7 @@ class App extends Component {
   render() {
     return (
        <div className="App">
-       <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn}/>
+       <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn} email={this.state.username}/>
          <header>
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
@@ -65,6 +66,7 @@ class App extends Component {
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
+              <Route path="/createCourse"  render={() => <Create username={this.state.username} loggedIn = {this.state.loggedIn}/>} />
            </Switch>
          </header>
        </div>

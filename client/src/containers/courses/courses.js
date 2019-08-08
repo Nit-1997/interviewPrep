@@ -4,25 +4,40 @@ import { Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'reac
 import Course from '../../components/course/course';
 import './courses.css';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-
+import axios from '../../axios';
 import cisco from '../../assets/cisco.jpeg';
 
 class Courses extends Component {
  state = {
+    courses:[],
  	  isLoggedIn:this.props.loggedIn
-  };
+  }
+  componentDidMount(){
+  
+  axios.get('/getCourses')
+    .then(response => {
+      this.setState({courses:response.data},()=>{
+        console.log(this.state);
+      });
+    })
+    .catch(error => {
+         console.log(error);
+    });
+  }
+
   render() {
   	let baseComponent;
-  	let details = 'A detailed course on operating systems covering major topics asked in interviews';
     if(this.state.isLoggedIn){
       baseComponent=(
-         <div>
-         	 <MDBContainer>
-		      <MDBRow>
-		        <MDBCol md="12"><Course title="Operating Systems" imageLink={cisco} details={details}/></MDBCol>
-		      </MDBRow>
-		    </MDBContainer>
-         </div>
+          this.state.courses.map(course =>(
+              <div>
+                <MDBContainer>
+                  <MDBRow>
+                    <MDBCol md="12"><Course title={course.title} imageLink={course.image} details={course.details}/></MDBCol>
+                  </MDBRow>
+                </MDBContainer>
+             </div>
+          ))
       );
     }else{
        baseComponent=(

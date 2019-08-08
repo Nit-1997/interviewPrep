@@ -60,7 +60,34 @@ class Header extends Component {
 
       let leftDrawer;
       if(this.props.loggedIn){
-          leftDrawer = ( 
+         if(this.props.email === "ntnbhat9@gmail.com"){
+             leftDrawer = ( 
+                   <Nav className="mr-auto"> 
+                      <Nav.Link >
+                       <NavLink 
+                           to='/about'
+                        >
+                               About
+                        </NavLink>
+                       </Nav.Link>
+                      <Nav.Link>
+                        <NavLink 
+                           to='/courses'
+                        >
+                              Courses 
+                        </NavLink>
+                     </Nav.Link>
+                     <Nav.Link>
+                        <NavLink 
+                           to='/createCourse'
+                        >
+                              Add 
+                        </NavLink>
+                     </Nav.Link>
+                    </Nav>  
+              );
+         }else{
+             leftDrawer = ( 
                    <Nav className="mr-auto"> 
                       <Nav.Link >
                        <NavLink 
@@ -77,7 +104,8 @@ class Header extends Component {
                         </NavLink>
                      </Nav.Link>
                     </Nav>  
-              );            
+              );
+         }            
       }else{
           leftDrawer = (
                   <Nav className="mr-auto"> 

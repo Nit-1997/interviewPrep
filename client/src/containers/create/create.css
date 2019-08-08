@@ -1,0 +1,18 @@
+html{
+	height:100%;
+}
+
+
+.mainer {
+background:linear-gradient(rgba(14,15,21,0.55), rgba(14,15,21,0.55)),url('../../assets/background.jpg');
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.h1, h1 {
+    font-size: 5rem;
+}
