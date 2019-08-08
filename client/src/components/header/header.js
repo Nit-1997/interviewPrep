@@ -28,9 +28,9 @@ class Header extends Component {
       }
 
     render() {
-      let leftDrawer;
+      let rightDrawer;
       if(this.props.loggedIn){
-            leftDrawer= ( 
+            rightDrawer= ( 
                   <Nav> 
                       <Nav.Link >
                             <Button onClick={this.logout}>Logout</Button>
@@ -38,7 +38,7 @@ class Header extends Component {
                 </Nav>
               );            
       }else{
-          leftDrawer= (
+          rightDrawer= (
               <Nav> 
                 <Nav.Link >
                  <NavLink 
@@ -55,6 +55,43 @@ class Header extends Component {
                   </NavLink>
                </Nav.Link>
               </Nav> 
+         );
+      }
+
+      let leftDrawer;
+      if(this.props.loggedIn){
+          leftDrawer = ( 
+                   <Nav className="mr-auto"> 
+                      <Nav.Link >
+                       <NavLink 
+                           to='/about'
+                        >
+                               About
+                        </NavLink>
+                       </Nav.Link>
+                      <Nav.Link>
+                        <NavLink 
+                           to='/courses'
+                        >
+                              Courses 
+                        </NavLink>
+                     </Nav.Link>
+                    </Nav>  
+              );            
+      }else{
+          leftDrawer = (
+                  <Nav className="mr-auto"> 
+                        <Nav.Link >
+                         <NavLink 
+                             to='/about'
+                          >
+                                 About
+                          </NavLink>
+                         </Nav.Link>
+                        <Nav.Link>
+                                Courses 
+                       </Nav.Link>
+                    </Nav> 
          );
       }
 
@@ -87,24 +124,9 @@ class Header extends Component {
         </NavLink> 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto"> 
-                <Nav.Link >
-                 <NavLink 
-                     to='/about'
-                  >
-                         About
-                  </NavLink>
-                 </Nav.Link>
-                <Nav.Link>
-                  <NavLink 
-                     to='/about'
-                  >
-                        Courses 
-                  </NavLink>
-               </Nav.Link>
-              </Nav>  
              {leftDrawer}
-        
+             {rightDrawer}
+             
           </Navbar.Collapse>
        </Navbar>
        <br/>

@@ -3,6 +3,7 @@ import {Container,Button} from 'react-bootstrap';
 import {Route,Switch} from 'react-router-dom';
 import Landing from './containers/landing/landing';
 import Signup from './containers/signup/signup';
+import Courses from './containers/courses/courses';
 import Login from './containers/login/login';
 import About from './containers/about/about';
 import Header from './components/header/header';
@@ -61,6 +62,7 @@ class App extends Component {
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
               <Route path="/about" render={() => <About/>}/>
+              <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
            </Switch>

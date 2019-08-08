@@ -19,7 +19,7 @@ class Imager extends Component{
       if(this.props.loggedIn){
             button= ( 
                   <NavLink 
-                     to='/about'
+                     to='/courses'
                   >
                   <Button  variant="primary">View Courses</Button>
                   </NavLink>
