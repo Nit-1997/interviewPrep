@@ -1,0 +1,24 @@
+html{
+	height:100%;
+}
+
+
+.mainx {
+background:linear-gradient(rgba(14,15,21,0.55), rgba(14,15,21,0.55)),url('../../assets/background.jpg');
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.baseComp{
+	padding-top: 10px;
+}
+
+.x{
+	padding-top: 100px;
+	padding-bottom: 10px;
+}

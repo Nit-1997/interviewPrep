@@ -60,4 +60,24 @@ router.get('/getCourses',function(req,res){
     });
 });
 
+router.post('/addLinks',function(req,res){
+  console.log(req.body);
+   var id = req.body.course._id;
+   var link = {};
+   link.link = req.body.link;
+   link.title = req.body.title; 
+   console.log('here');
+   Course.findOneAndUpdate(
+    { _id: id }, 
+    { $push: { links: link} } ,
+    function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(success);
+            res.json(success);
+        }
+    });
+});
+
 module.exports = router;

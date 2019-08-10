@@ -35,9 +35,6 @@ app.get("*", (req, res) => {
 });
 
 
-
-
-
 const port  = process.env.PORT||7000;
 app.listen(port,process.env.IP,function(){
      console.log("app server has started on heroku ");

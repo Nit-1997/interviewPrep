@@ -3,7 +3,7 @@ var CourseSchema = new mongoose.Schema({
      title        : String,
      image        : String,
      details      : String,
-     links        : [String],
+     links        : [{ link: 'string' }],
      createdAt    : { type: Date, default: Date.now }      
 });
 

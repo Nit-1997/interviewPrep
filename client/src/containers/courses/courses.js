@@ -5,7 +5,6 @@ import Course from '../../components/course/course';
 import './courses.css';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import axios from '../../axios';
-import cisco from '../../assets/cisco.jpeg';
 
 class Courses extends Component {
  state = {
@@ -24,6 +23,14 @@ class Courses extends Component {
     });
   }
 
+  componentDidUpdate(){
+      if(this.state.isLoggedIn !== this.props.loggedIn){
+         this.setState({isLoggedIn:this.props.loggedIn},()=>{
+           console.log(this.state);
+        });
+      }
+  }
+
   render() {
   	let baseComponent;
     if(this.state.isLoggedIn){
@@ -32,7 +39,7 @@ class Courses extends Component {
               <div>
                 <MDBContainer>
                   <MDBRow>
-                    <MDBCol md="12"><Course title={course.title} imageLink={course.image} details={course.details}/></MDBCol>
+                    <MDBCol md="12"><Course courseObj={course}/></MDBCol>
                   </MDBRow>
                 </MDBContainer>
              </div>
