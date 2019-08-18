@@ -22,7 +22,7 @@ class Youtuber extends Component{
 
   render(){
     const opts = {
-      height: '390',
+      height: '200',
       width: '300'
     }   
      return(

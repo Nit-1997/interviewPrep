@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
 import './courseDetails.css';
-import Player from '../youtube/youtube';
+import Comp from '../../containers/viewcomp/viewcomp';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
 class CourseDetails extends Component{
@@ -34,7 +34,7 @@ class CourseDetails extends Component{
       }
      let courseDetails = this.props.location.state.detail;
      let links = courseDetails.links;
-      if(this.state.links !== links){
+      if(this.state.links.length !== links.length){
           this.setState({links:links},()=>{
               console.log(this.state);
           });
@@ -57,7 +57,8 @@ class CourseDetails extends Component{
               <div>
                 <MDBContainer>
                   <MDBRow>
-                    <MDBCol md="12"><Player id={link.link}/></MDBCol>
+                    <MDBCol md="12"><h5 style={{ color: 'white'}}>{link.title}</h5></MDBCol>
+                    <MDBCol md="12"><Comp link = {link}/></MDBCol>
                   </MDBRow>
                 </MDBContainer>
              </div>

@@ -61,12 +61,12 @@ router.get('/getCourses',function(req,res){
 });
 
 router.post('/addLinks',function(req,res){
-  console.log(req.body);
    var id = req.body.course._id;
-   var link = {};
-   link.link = req.body.link;
-   link.title = req.body.title; 
-   console.log('here');
+   var link = {
+       title:req.body.title,
+       link:req.body.link,
+       types:req.body.type
+   }
    Course.findOneAndUpdate(
     { _id: id }, 
     { $push: { links: link} } ,
