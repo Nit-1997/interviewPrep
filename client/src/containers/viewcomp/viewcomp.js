@@ -4,7 +4,8 @@ import {withRouter} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
 import Player from '../../components/youtube/youtube';
-
+import Pdf from '../../components/pdf/pdf';
+import './viewcomp.css';
 
 class ViewComp extends Component{
    state = {
@@ -18,14 +19,15 @@ class ViewComp extends Component{
           );
   	 }
   	 if(this.props.link.types === 'document'){
-  	 	  baseComp = (
+  	 	 
+        baseComp = (
             <div>
-		        
-		    </div>
+		          <Pdf link={this.props.link.link}/>
+		       </div>
           );
   	 }
      return(
-       <div>
+       <div className="mainxxx">
           {baseComp}
        </div>
      );
