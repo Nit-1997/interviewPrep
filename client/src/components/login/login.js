@@ -48,19 +48,19 @@ class Login extends Component {
   render() {
     return (
       <Form className="major">
-          <h1 className="title">Login</h1>
+          <h1 className="title commHeader">Login</h1>
           <Form.Group controlId="username">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" onChange={this.onChange}/>
-            <Form.Text className="text-muted">
+            <Form.Label className="commHeader">Email address</Form.Label>
+            <Form.Control className="commHeader" type="email" placeholder="Enter email" onChange={this.onChange}/>
+            <Form.Text className="text-muted" className="commHeader">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={this.onChange} />
+            <Form.Label className="commHeader">Password</Form.Label>
+            <Form.Control className="commHeader" type="password" placeholder="Password" onChange={this.onChange} />
           </Form.Group>
-          <Button variant="primary" onClick ={this.onSubmitHandler}>
+          <Button variant="primary" className="commHeader" onClick ={this.onSubmitHandler}>
             Login
          </Button>
      </Form>

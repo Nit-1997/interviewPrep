@@ -55,7 +55,7 @@ class Create extends Component {
 
   render() {
     return (
-      <Form className="major">
+      <Form className="major commHeader">
           <h1 className="title">Add a course</h1>
           
           <Form.Group controlId="title">

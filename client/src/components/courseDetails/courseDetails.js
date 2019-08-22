@@ -85,7 +85,7 @@ class CourseDetails extends Component{
       }
     }
      return(
-      <div>
+      <div className="commHeader">
        <div className ="mainx">
            <div className="x">
             {button} 

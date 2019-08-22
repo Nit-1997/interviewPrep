@@ -10,6 +10,7 @@ import walmart from '../../assets/walmart.jpeg';
 import { Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
+import './image.css';
 
 
 
@@ -21,12 +22,12 @@ class Imager extends Component{
                   <NavLink 
                      to='/courses'
                   >
-                  <Button  variant="primary">View Courses</Button>
+                  <Button  variant="primary" className="commHeader">View Courses</Button>
                   </NavLink>
               );            
       }else{
           button= ( 
-                  <Button  variant="primary" disabled>View Courses</Button>
+                  <Button  variant="primary" className="commHeader" disabled>View Courses</Button>
               );  
       }
 
@@ -61,9 +62,9 @@ class Imager extends Component{
             <Image src={walmart} roundedCircle thumbnail fluid/>
           </Col> 
         </Row>
-        <p>
+        <h2 className="commHeader xs">
           Want to ace the technical interviews?
-        </p>
+        </h2>
          {button}
       </Container>
      );

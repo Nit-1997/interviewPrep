@@ -10,6 +10,7 @@ import Create from './containers/create/create';
 import Header from './components/header/header';
 import AddLinks from './components/addlinks/addlinks';
 import CourseDetails from './components/courseDetails/courseDetails';
+import AddComment from './containers/addcomment/addcomment';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
@@ -71,6 +72,7 @@ class App extends Component {
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
               <Route path="/createCourse"  render={() => <Create username={this.state.username} loggedIn = {this.state.loggedIn}/>} />
               <Route path="/singleCourse" render={() => <CourseDetails username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
+              <Route path="/addcomment" render={() => <AddComment username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
               <Route path="/addLinks" render={() => <AddLinks username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
            </Switch>
          </header>

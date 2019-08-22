@@ -1,0 +1,50 @@
+.xoxoro{
+  align-items: normal;
+  justify-content: normal;
+}
+
+.userlist{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.btn{
+	margin-right: 15px;
+}
+
+.avatar{
+	height: 160px;
+}
+
+@media (min-width: 576px)
+.col-sm-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    margin-top: 60px;
+    max-width: 33.333333%;
+}
+
+.containerx{
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.reviewHead{
+	font-size: 28px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 100;
+	color: #ab111b;
+}
+.reviewBody{
+	color: #605E5E;
+	font-family: 'Nunito', sans-serif;
+	text-align: center;	
+}
+
+.commHeader{
+	font-family: 'Nunito', sans-serif;
+}
+
+.babyz{
+	width:20px;
+	margin-bottom: 10px;
+}

@@ -92,7 +92,7 @@ class AddLinks extends Component {
       );
     }
     return (
-       <div>
+       <div className="commHeader">
          {comp}
        </div>
     );

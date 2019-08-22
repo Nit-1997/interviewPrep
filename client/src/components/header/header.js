@@ -127,7 +127,7 @@ class Header extends Component {
       let text = 'login to view courses';  
       if(!this.props.loggedIn){
          flasher = (
-           <Alert variant="danger">
+           <Alert variant="danger" className="commHeader">
             <p>{text}</p>
            </Alert>
          );
@@ -135,7 +135,7 @@ class Header extends Component {
       
   return(
      <div>
-      <Navbar fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Navbar className="commHeader" fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
        <NavLink 
                  to='/'
         >

@@ -54,23 +54,23 @@ class Signup extends Component {
   render() {
     return (
       <Form className="major">
-          <h1 className="title">Sign up</h1>
+          <h1 className="title commHeader">Sign up</h1>
           <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" onChange={this.onChangeHandler} placeholder="Enter email" />
-            <Form.Text className="text-muted">
+            <Form.Label className="commHeader">Email address</Form.Label>
+            <Form.Control className="commHeader" type="email" onChange={this.onChangeHandler} placeholder="Enter email" />
+            <Form.Text className="text-muted" className="commHeader">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
 
           <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text"  onChange={this.onChangeHandler} placeholder="Enter Name" />
+            <Form.Label className="commHeader">Name</Form.Label>
+            <Form.Control type="text"  onChange={this.onChangeHandler} className="commHeader" placeholder="Enter Name" />
           </Form.Group>
            
           <Form.Group controlId="college">
-            <Form.Label>College</Form.Label>
-            <Form.Control as="select" onChange={this.onChangeHandler}>
+            <Form.Label className="commHeader">College</Form.Label>
+            <Form.Control as="select" onChange={this.onChangeHandler} className="commHeader">
               <option value="">Choose...</option>
               <option value="SJCE">SJCE</option>
               <option value="NIE">NIE</option>
@@ -80,8 +80,8 @@ class Signup extends Component {
           </Form.Group>
 
           <Form.Group controlId="branch">
-            <Form.Label>Branch</Form.Label>
-            <Form.Control as="select" onChange={this.onChangeHandler}>
+            <Form.Label className="commHeader">Branch</Form.Label>
+            <Form.Control as="select" onChange={this.onChangeHandler} className="commHeader">
               <option value="">Choose...</option>
               <option value="CSE">CSE</option>
               <option value="ISE">ISE</option>
@@ -92,8 +92,8 @@ class Signup extends Component {
 
 
            <Form.Group controlId="year">
-            <Form.Label>Year</Form.Label>
-            <Form.Control as="select" onChange={this.onChangeHandler}>
+            <Form.Label className="commHeader">Year</Form.Label>
+            <Form.Control as="select" onChange={this.onChangeHandler} className="commHeader">
               <option value="">Choose...</option>
               <option value="1">First</option>
               <option value="2">Second</option>
@@ -103,10 +103,10 @@ class Signup extends Component {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={this.onChangeHandler} />
+            <Form.Label className="commHeader">Password</Form.Label>
+            <Form.Control className="commHeader" type="password" placeholder="Password" onChange={this.onChangeHandler} />
           </Form.Group>
-          <Button variant="primary"  onClick ={this.onSubmitHandler}>
+          <Button variant="primary"  className="commHeader" onClick ={this.onSubmitHandler}>
             Submit
          </Button>
      </Form>
