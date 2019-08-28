@@ -7,6 +7,12 @@ var CourseSchema = new mongoose.Schema({
                        title: String,
                        types: String
                      }],
+     comments        : [{ name: String,
+                          content: String,
+                          username: String,
+                          rating: String,
+                          avatar: String
+                       }],
      createdAt    : { type: Date, default: Date.now }      
 });
 

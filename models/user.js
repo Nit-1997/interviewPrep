@@ -10,7 +10,8 @@ const userSchema = new Schema({
       name:String,
       college:String,
       year:String,
-      branch:String
+      branch:String,
+      image:String
 })
 
 // Define schema methods

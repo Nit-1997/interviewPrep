@@ -1273,6 +1273,58 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
+"@tensorflow-models/toxicity@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@tensorflow-models/toxicity/-/toxicity-1.1.1.tgz#924e9a860e02cae6dedfd60352e84eab0d87a443"
+  integrity sha512-fbgBvHKiZP7Purw0XS+IDZVYUP1jnNGe3MSKTDHQtdKTEkQ3hJ7tKo5JP26vlvCp9S+BkvQa7uxBGcXx41jkSQ==
+  dependencies:
+    "@tensorflow-models/universal-sentence-encoder" "~1.1.1"
+
+"@tensorflow-models/universal-sentence-encoder@~1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@tensorflow-models/universal-sentence-encoder/-/universal-sentence-encoder-1.1.1.tgz#dba0e200f6787dda85152e46727e02fad4b9552f"
+  integrity sha512-A6vyjSgI5LM00fD0cJe3uYqy9NQBxYEq9snfcKKlzzoQE6ZlrBhlCKWnR4Y3tCfA/4dmIi/l0/wj9GT83+gocA==
+
+"@tensorflow/tfjs-converter@1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-converter/-/tfjs-converter-1.2.8.tgz#86fa47be3e92a90d4191956f08015a17b93c3ef9"
+  integrity sha512-weHzkNRVgnY9TcbA3XTneNgCyuIXLjF8ks8YbFA+81i2w6qO90xiAdWtP2YmR+F9K9S4WR3bSSB0AQKZAp+mPQ==
+
+"@tensorflow/tfjs-core@1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-core/-/tfjs-core-1.2.8.tgz#d6873b88522f8cf25d34c10afd095866578d7d92"
+  integrity sha512-lWV4vAnXAAmahXpCWBwdGGW9HO6iNw9pUeVYih7pDXeJahMk3OJs6SgjRNhwn+ldsGwRoorR0/RHg0yNLmqWxQ==
+  dependencies:
+    "@types/offscreencanvas" "~2019.3.0"
+    "@types/seedrandom" "2.4.27"
+    "@types/webgl-ext" "0.0.30"
+    "@types/webgl2" "0.0.4"
+    node-fetch "~2.1.2"
+    seedrandom "2.4.3"
+
+"@tensorflow/tfjs-data@1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-data/-/tfjs-data-1.2.8.tgz#04325ad01167b0168ca8e34e85bc6a475aa5e8a0"
+  integrity sha512-KUJy55mRx33OodlDKy6Emt2vvV9EadumZ6JzbtZCf1ADK5ddRpRLhCrEmGauCk+Ay1Zj+p6MYx6CLYqhJsENFQ==
+  dependencies:
+    "@types/node-fetch" "^2.1.2"
+    node-fetch "~2.1.2"
+
+"@tensorflow/tfjs-layers@1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-layers/-/tfjs-layers-1.2.8.tgz#6d696dcfa530708b1fdb0cd7614a0d2a1c8ae58a"
+  integrity sha512-NMcA44U0rvVpo/VUTMpqkBP3jbvNhRXV7K8KovLi/WZ9FG/u5XIbIqFkcT3QXBDUyjDUNFToYQM/59dtnaut9Q==
+
+"@tensorflow/tfjs@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs/-/tfjs-1.2.8.tgz#441b78294f1e2f7174c5773f82424b8d963f0f60"
+  integrity sha512-pNgLMWNpzWn8AIaTV+1MOjg0a99IBgGjDLLhgDBJ6m6/mzfDdFv2TxcYtF0kdF4asSd4cHaupuELeOzSF2coFw==
+  dependencies:
+    "@tensorflow/tfjs-converter" "1.2.8"
+    "@tensorflow/tfjs-core" "1.2.8"
+    "@tensorflow/tfjs-data" "1.2.8"
+    "@tensorflow/tfjs-layers" "1.2.8"
+
 "@types/babel__core@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.2.tgz#608c74f55928033fce18b99b213c16be4b3d114f"
@@ -1339,6 +1391,23 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.137.tgz#8a4804937dc6462274ffcc088df8f14fc1b368e2"
   integrity sha512-g4rNK5SRKloO+sUGbuO7aPtwbwzMgjK+bm9BBhLD7jGUiGR7zhwYEhSln/ihgYQBeIJ5j7xjyaYzrWTcu3UotQ==
 
+"@types/node-fetch@^2.1.2":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.0.tgz#1c55616a4591bdd15a389fbd0da4a55b9502add5"
+  integrity sha512-TLFRywthBgL68auWj+ziWu+vnmmcHCDFC/sqCOQf1xTz4hRq8cu79z8CtHU9lncExGBsB8fXA4TiLDLt6xvMzw==
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*":
+  version "12.7.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
+  integrity sha512-dyYO+f6ihZEtNPDcWNR1fkoTDf3zAK3lAABDze3mz6POyIercH0lEUawUFXlG8xaQZmm1yEBON/4TsYv/laDYg==
+
+"@types/offscreencanvas@~2019.3.0":
+  version "2019.3.0"
+  resolved "https://registry.yarnpkg.com/@types/offscreencanvas/-/offscreencanvas-2019.3.0.tgz#3336428ec7e9180cf4566dfea5da04eb586a6553"
+  integrity sha512-esIJx9bQg+QYF0ra8GnvfianIY8qWB0GBx54PK5Eps6m+xTj86KLavHv6qDhzKcu5UUOgNfJ2pWaIIV7TRUd9Q==
+
 "@types/prop-types@*":
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
@@ -1379,10 +1448,25 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/seedrandom@2.4.27":
+  version "2.4.27"
+  resolved "https://registry.yarnpkg.com/@types/seedrandom/-/seedrandom-2.4.27.tgz#9db563937dd86915f69092bc43259d2f48578e41"
+  integrity sha1-nbVjk33YaRX2kJK8QyWdL0hXjkE=
+
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+
+"@types/webgl-ext@0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/webgl-ext/-/webgl-ext-0.0.30.tgz#0ce498c16a41a23d15289e0b844d945b25f0fb9d"
+  integrity sha512-LKVgNmBxN0BbljJrVUwkxwRYqzsAEPcZOe6S2T6ZaBDIrFp0qu4FNlpc5sM1tGbXUYFgdVQIoeLk1Y1UoblyEg==
+
+"@types/webgl2@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@types/webgl2/-/webgl2-0.0.4.tgz#c3b0f9d6b465c66138e84e64cb3bdf8373c2c279"
+  integrity sha512-PACt1xdErJbMUOUweSrbVM7gSIYm1vTncW2hF6Os/EeWi6TXYAYMPp+8v6rzHmypE5gHrxaxZNXgMkJVIdZpHw==
 
 "@types/yargs@^12.0.2", "@types/yargs@^12.0.9":
   version "12.0.12"
@@ -6831,6 +6915,11 @@ node-fetch@^1.0.1:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
+node-fetch@~2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
+  integrity sha1-q4hOjn5X44qUR1POxwb3iNF2i7U=
+
 node-forge@0.7.5:
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.5.tgz#6c152c345ce11c52f465c2abd957e8639cd674df"
@@ -8776,6 +8865,16 @@ react-toastify@5.1.0:
     prop-types "^15.7.2"
     react-transition-group "^2.6.1"
 
+react-toastr@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-toastr/-/react-toastr-3.0.0.tgz#1712aafc613ccc2afbf6c1c11c55d558f5d58328"
+  integrity sha512-sFDMTzRdfYJK54F6z+34M0Ofj6I++zuaIGls9Mlsy/R895lt54YTqjyM40SSJp1ATi/mosCnUPhJbftTRUsx3w==
+  dependencies:
+    babel-runtime "^6.26.0"
+    classnames "^2.2.5"
+    dom-helpers "^3.2.1"
+    lodash "^4.17.4"
+
 react-transition-group@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.0.1.tgz#8cb8d58763e259da465385bb83b3b41b3ecba629"
@@ -9297,6 +9396,11 @@ schema-utils@^1.0.0:
     ajv "^6.1.0"
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
+
+seedrandom@2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/seedrandom/-/seedrandom-2.4.3.tgz#2438504dad33917314bff18ac4d794f16d6aaecc"
+  integrity sha1-JDhQTa0zkXMUv/GKxNeU8W1qrsw=
 
 select-hose@^2.0.0:
   version "2.0.0"

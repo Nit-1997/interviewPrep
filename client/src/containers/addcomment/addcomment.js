@@ -38,9 +38,11 @@ class AddComment extends Component{
              <CommentBox
                  {...this.props}
                  className="xoxo"
+                 course = {this.state.course}
               />
               <Comment
                  {...this.props}
+                 course = {this.state.course}
               />
            </div>
        );

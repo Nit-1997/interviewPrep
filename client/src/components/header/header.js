@@ -7,10 +7,49 @@ import axios from '../../axios';
 
 class Header extends Component {
        constructor() {
-        super()
-        this.logout = this.logout.bind(this)
+        super();
+        this.state = {
+           user:null,
+           image:'' 
+        }
+        this.logout = this.logout.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
     }
 
+    componentDidMount(){
+       if(this.props.loggedIn){
+        let formData = {
+            username:this.props.email
+        }
+        axios.post('/getUserInfo',formData)
+        .then(response => {
+          this.setState({user:response.data},()=>{
+             console.log(this.state);
+          });       
+       });
+      }
+    }
+
+    componentDidUpdate(){
+      if(this.props.loggedIn && this.state.user === null){
+        let formData = {
+            username:this.props.email
+        }
+        axios.post('/getUserInfo',formData)
+        .then(response => {
+          let image = '';
+          this.setState({user:response.data},()=>{
+             image = this.state.user[0].image;
+          });
+          this.setState({image:image},()=>{
+              console.log(this.state.image)
+          });       
+       });
+      }
+    }
+    
+  
     logout(event) {
         event.preventDefault()
         console.log('logging out')
@@ -27,12 +66,19 @@ class Header extends Component {
         })
       }
 
+    
     render() {
       let rightDrawer;
       if(this.props.loggedIn){
             rightDrawer= ( 
                   <Nav> 
                       <Nav.Link >
+                             <Image className="proPic" 
+                                    src={this.state.image} 
+                                    roundedCircle 
+                                    fluid
+                              />
+
                             <Button onClick={this.logout}>Logout</Button>
                        </Nav.Link>
                 </Nav>

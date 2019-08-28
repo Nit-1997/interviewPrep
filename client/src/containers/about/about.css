@@ -1,0 +1,28 @@
+.about{
+  background:linear-gradient(rgba(14,15,21,0.55), rgba(14,15,21,0.55)),url('https://www.rxwallpaper.site/wp-content/uploads/dark-wallpaper-1920x1080-c2b7e291a0-download-free-awesome-full-hd-2.jpg');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(20px + 2vmin);
+  color: white;
+  text-align: center;
+}
+
+.ceo{
+	height: 400px;
+	width: 400px;
+}
+
+.ceoDesc{
+   font-size: 18px;
+}
+
+.ceoName{
+    font-size: 60px;
+    font-weight: 500;
+}
+
+.designation{
+    font-size: 20px;
+}
