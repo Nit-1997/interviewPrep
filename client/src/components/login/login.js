@@ -1,5 +1,6 @@
 import React,{Component} from "react";
 import './login.css';
+import {NavLink} from 'react-router-dom';
 import {Form,Button} from 'react-bootstrap';
 import axios from '../../axios';
 
@@ -63,6 +64,13 @@ class Login extends Component {
           <Button variant="primary" className="commHeader" onClick ={this.onSubmitHandler}>
             Login
          </Button>
+         <br/><br/>
+         <NavLink 
+                to='/forgetPass'
+                className="commHeader linker"
+         >
+            Forgot Password?
+        </NavLink>
      </Form>
   );
   }

@@ -72,13 +72,14 @@ class Header extends Component {
       if(this.props.loggedIn){
             rightDrawer= ( 
                   <Nav> 
-                      <Nav.Link >
+                      <Nav.Link eventKey="1">
                              <Image className="proPic" 
                                     src={this.state.image} 
                                     roundedCircle 
                                     fluid
                               />
-
+                      </Nav.Link>
+                      <Nav.Link eventKey="1">
                             <Button onClick={this.logout}>Logout</Button>
                        </Nav.Link>
                 </Nav>
@@ -86,14 +87,14 @@ class Header extends Component {
       }else{
           rightDrawer= (
               <Nav> 
-                <Nav.Link >
+                <Nav.Link eventKey="1">
                  <NavLink 
                      to='/login'
                   >
                          Login
                   </NavLink>
                  </Nav.Link>
-                <Nav.Link>
+                <Nav.Link eventKey="1">
                   <NavLink 
                      to='/signup'
                   >
@@ -109,21 +110,21 @@ class Header extends Component {
          if(this.props.email === "ntnbhat9@gmail.com"){
              leftDrawer = ( 
                    <Nav className="mr-auto"> 
-                      <Nav.Link >
+                      <Nav.Link  eventKey="1">
                        <NavLink 
                            to='/about'
                         >
                                About
                         </NavLink>
                        </Nav.Link>
-                      <Nav.Link>
+                      <Nav.Link eventKey="1">
                         <NavLink 
                            to='/courses'
                         >
                               Courses 
                         </NavLink>
                      </Nav.Link>
-                     <Nav.Link>
+                     <Nav.Link eventKey="1">
                         <NavLink 
                            to='/createCourse'
                         >
@@ -135,14 +136,14 @@ class Header extends Component {
          }else{
              leftDrawer = ( 
                    <Nav className="mr-auto"> 
-                      <Nav.Link >
+                      <Nav.Link eventKey="1">
                        <NavLink 
                            to='/about'
                         >
                                About
                         </NavLink>
                        </Nav.Link>
-                      <Nav.Link>
+                      <Nav.Link eventKey="1">
                         <NavLink 
                            to='/courses'
                         >
@@ -155,14 +156,14 @@ class Header extends Component {
       }else{
           leftDrawer = (
                   <Nav className="mr-auto"> 
-                        <Nav.Link >
+                        <Nav.Link eventKey="1">
                          <NavLink 
                              to='/about'
                           >
                                  About
                           </NavLink>
                          </Nav.Link>
-                        <Nav.Link>
+                        <Nav.Link eventKey="1">
                                 Courses 
                        </Nav.Link>
                     </Nav> 
@@ -181,7 +182,7 @@ class Header extends Component {
       
   return(
      <div>
-      <Navbar className="commHeader" fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="lg" className="commHeader" fixed="top" bg="primary" variant="dark">
        <NavLink 
                  to='/'
         >

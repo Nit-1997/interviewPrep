@@ -1,7 +1,8 @@
 import React,{ Component } from "react";
 import './signup.css';
 import  { Redirect } from 'react-router-dom'
-import {Form,Button} from 'react-bootstrap';
+import {Form,Button,Toast} from 'react-bootstrap';
+import ErrorImg from '../../assets/error.png';
 import axios from 'axios';
 
 class Signup extends Component {
@@ -14,7 +15,9 @@ class Signup extends Component {
         branch:'',
         year:'',
         password:'',
-        image:''
+        confirm:'',
+        image:'',
+        show:false
    }
   }
   
@@ -29,41 +32,73 @@ class Signup extends Component {
         console.log(this.state);
       })
   }
+
   onSubmitHandler = (e) =>{
-    const formData = new FormData();
-    formData.append('image',this.state.image);
-    formData.append('email',this.state.email);
-    formData.append('name',this.state.name);
-    formData.append('college',this.state.college);
-    formData.append('branch',this.state.branch);
-    formData.append('year',this.state.year);
-    formData.append('password',this.state.password);
-    const url = 'https://prepzone.herokuapp.com/create';
-    axios.post(url,
-      formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      ).then(response=>{
-       if (!response.data.errmsg) {
-        console.log('successful signup')
-        console.log(response.data);
-        this.props.history.push({
-          pathname: '/login',
-          state: { detail: response.data }
+    if(this.state.password === this.state.confirm){
+        const formData = new FormData();
+        formData.append('image',this.state.image);
+        formData.append('email',this.state.email);
+        formData.append('name',this.state.name);
+        formData.append('college',this.state.college);
+        formData.append('branch',this.state.branch);
+        formData.append('year',this.state.year);
+        formData.append('password',this.state.password);
+        const url = 'https://prepzone.herokuapp.com/create';
+        axios.post(url,
+          formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+          ).then(response=>{
+           if (!response.data.errmsg) {
+            console.log('successful signup')
+            console.log(response.data);
+            this.props.history.push({
+              pathname: '/login',
+              state: { detail: response.data }
+            });
+          } else {
+            console.log('username already taken')
+          }
+        }).catch(error => {
+          console.log('signup error: ')
+          console.log(error)
         });
-      } else {
-        console.log('username already taken')
-      }
-    }).catch(error => {
-      console.log('signup error: ')
-      console.log(error)
-    });
+
+
+    }else{
+      window.scrollTo(0, 0);
+      this.setState({show:true},()=>{
+        console.log(this.state.show);
+      });  
+    }
   }
 
   render() {
     return (
+      <div>
+         <Toast
+        onClose={() => this.setState({show:false})}
+        show={this.state.show} delay={4000} autohide
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+        }}
+      >
+          <Toast.Header>
+              <img src={ErrorImg} className="rounded mr-2 toastImg" alt="" />
+              <strong className="mr-auto">Password Mistmatch</strong>
+              <small>just now</small>
+          </Toast.Header>
+
+          <Toast.Body>
+             Passwords don't match
+          </Toast.Body>
+      </Toast>
+
+
       <Form className="major">
           <h1 className="title commHeader">Sign up</h1>
           
@@ -123,10 +158,17 @@ class Signup extends Component {
             <Form.Label className="commHeader">Password</Form.Label>
             <Form.Control className="commHeader" type="password" placeholder="Password" onChange={this.onChangeHandler} />
           </Form.Group>
+
+          <Form.Group controlId="confirm">
+            <Form.Label className="commHeader">Confirm Password</Form.Label>
+            <Form.Control className="commHeader" type="password" placeholder="Confirm Password" onChange={this.onChangeHandler} />
+          </Form.Group>
+
           <Button variant="primary"  className="commHeader" onClick ={this.onSubmitHandler}>
             Submit
          </Button>
      </Form>
+     </div>
     );
   }
 }

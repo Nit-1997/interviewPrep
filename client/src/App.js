@@ -5,6 +5,7 @@ import Landing from './containers/landing/landing';
 import Signup from './containers/signup/signup';
 import Courses from './containers/courses/courses';
 import Login from './containers/login/login';
+import ForgetPass from './containers/forgetPass/forgetPass';
 import About from './containers/about/about';
 import Create from './containers/create/create';
 import Header from './components/header/header';
@@ -74,6 +75,7 @@ class App extends Component {
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
+              <Route path="/forgetPass"  render={() => <ForgetPass updateUser={this.updateUser}/>} />
               <Route path="/createCourse"  render={() => <Create username={this.state.username} loggedIn = {this.state.loggedIn}/>} />
               <Route path="/singleCourse" render={() => <CourseDetails username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
               <Route path="/addcomment" render={() => <AddComment username={this.state.username} loggedIn={this.state.loggedIn}/>}/>

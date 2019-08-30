@@ -16,6 +16,14 @@ class Stars extends Component {
     this.setState({number:number});
  }
 
+  componentDidUpdate(){
+    if(this.state.number!=this.props.number){
+      var num = this.props.number;
+      var number = parseInt(num, 10);
+      this.setState({number:number});
+    } 
+ }
+
   render() {
     return (
       <div>
