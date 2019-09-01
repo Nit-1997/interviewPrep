@@ -121,5 +121,30 @@ router.post('/getComments',function(req,res){
   });
 });
 
+var hackerEarth=require('hackerearth-node'); //require the Library
+//Now set your application 
+var hackerEarth=new hackerEarth(
+                                '623b26940fafc130ac89e207dab7fb6545e054ee',  //Your Client Secret Key here this is mandatory
+                                0  //mode sync=1 or async(optional)=0 or null async is by default and preferred for nodeJS
+);
+
+
+router.post('/compileCode',function(req,res){
+  console.log(req.body.code);
+  var config={};
+      config.time_limit=1;  //your time limit in integer
+      config.memory_limit=323244;  //your memory limit in integer
+      config.source=req.body.code;  //your source code for which you want to use hackerEarth api
+      config.input="";  //input against which you have to test your source code
+      config.language="C++"; //optional choose any one of them or none
+      //compile your code 
+      hackerEarth.compile(config,function(err,res){
+        if(err) {
+         console.log(err);
+      } else {
+        console.log(res);
+      }
+    });
+});
 
 module.exports = router;

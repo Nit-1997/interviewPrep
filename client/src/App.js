@@ -7,6 +7,7 @@ import Courses from './containers/courses/courses';
 import Login from './containers/login/login';
 import ForgetPass from './containers/forgetPass/forgetPass';
 import About from './containers/about/about';
+import Code from './containers/code/code';
 import Create from './containers/create/create';
 import Header from './components/header/header';
 import AddLinks from './components/addlinks/addlinks';
@@ -72,6 +73,7 @@ class App extends Component {
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
               <Route path="/about" render={() => <About/>}/>
+              <Route path="/code" render={() => <Code/>}/>
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
