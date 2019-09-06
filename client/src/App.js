@@ -73,7 +73,7 @@ class App extends Component {
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
               <Route path="/about" render={() => <About/>}/>
-              <Route path="/code" render={() => <Code/>}/>
+              <Route path="/code" render={() => <Code loggedIn={this.state.loggedIn}/>}/>
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />

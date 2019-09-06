@@ -1,0 +1,116 @@
+.coder{
+  background:linear-gradient(rgba(14,15,21,0.55), rgba(14,15,21,0.55)),url('https://images.wallpaperscraft.com/image/net_gray_background_bright_83492_1920x1080.jpg');
+  color: white;
+  padding-right: 16px;
+  white-space: pre-line;
+}
+
+.langsel{
+  width: fit-content;
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultsBox{
+   margin-top:40px;
+   height: 400px;
+}
+
+.langMid{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.langMiders{
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+    color: black
+}
+
+#excite{
+  background-color: white;
+  margin-top: 80px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#box1{
+    background-color: #F0F0F0;
+    margin: 10px 0px 10px 0px;
+    padding: 8px 0px 0px 40px;
+}
+
+#box2{
+    background-color: #F0F0F0;
+    margin: 10px 0px 10px 0px;
+    padding: 8px 0px 0px 40px;
+}
+
+#box3{
+    background-color: #F0F0F0;
+    margin: 10px 0px 10px 0px;
+    padding: 8px 0px 0px 40px;
+}
+
+.probStat{
+  font-size: 50px;
+}
+
+.contentCode{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.rightSide{
+  margin-top: 60px;
+}
+
+.sampleResultsBox{
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-bottom: 30px;
+}
+.sampleResults1{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background: #49eb77;
+  height: 200px;
+}
+
+.finalResultsBox{
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-bottom: 30px;
+}
+
+.finalResults{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background: #49eb77;
+  height: 200px;
+}
+
+.resultComp{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+}
+
+.contentCodex{
+    font-weight: 600;
+    font-size: 40px;
+    color: olivedrab;
+}
+
+.contentCodexScore{
+    font-weight: 600;
+    font-size: 70px;
+    color: olivedrab;
+}
+
+.sampleCaseBox{
+  padding-top: 10px;
+}

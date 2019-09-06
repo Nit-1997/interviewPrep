@@ -131,6 +131,13 @@ class Header extends Component {
                               Add 
                         </NavLink>
                      </Nav.Link>
+                     <Nav.Link eventKey="1">
+                  <NavLink 
+                     to='/code'
+                  >
+                         Code
+                  </NavLink>
+               </Nav.Link>
                     </Nav>  
               );
          }else{
@@ -150,6 +157,13 @@ class Header extends Component {
                               Courses 
                         </NavLink>
                      </Nav.Link>
+               <Nav.Link eventKey="1">
+                  <NavLink 
+                     to='/code'
+                  >
+                         Code
+                  </NavLink>
+               </Nav.Link>
                     </Nav>  
               );
          }            
@@ -166,6 +180,13 @@ class Header extends Component {
                         <Nav.Link eventKey="1">
                                 Courses 
                        </Nav.Link>
+                <Nav.Link eventKey="1">
+                  <NavLink 
+                     to='/code'
+                  >
+                         Code
+                  </NavLink>
+               </Nav.Link>
                     </Nav> 
          );
       }

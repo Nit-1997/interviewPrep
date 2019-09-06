@@ -121,30 +121,148 @@ router.post('/getComments',function(req,res){
   });
 });
 
-var hackerEarth=require('hackerearth-node'); //require the Library
-//Now set your application 
-var hackerEarth=new hackerEarth(
-                                '623b26940fafc130ac89e207dab7fb6545e054ee',  //Your Client Secret Key here this is mandatory
-                                0  //mode sync=1 or async(optional)=0 or null async is by default and preferred for nodeJS
-);
+
+const {c, cpp, node, python, java} = require('compile-run');
 
 
-router.post('/compileCode',function(req,res){
-  console.log(req.body.code);
-  var config={};
-      config.time_limit=1;  //your time limit in integer
-      config.memory_limit=323244;  //your memory limit in integer
-      config.source=req.body.code;  //your source code for which you want to use hackerEarth api
-      config.input="";  //input against which you have to test your source code
-      config.language="C++"; //optional choose any one of them or none
-      //compile your code 
-      hackerEarth.compile(config,function(err,res){
-        if(err) {
-         console.log(err);
-      } else {
-        console.log(res);
+function comparer(str1,str2){
+    if(str1[str1.length-1] === '\n'){
+       str1 = str1.substring(0,str1.length-1);
+    }
+    str1 = str1.split('\n');
+    for(var i=0;i<str1.length;i++){
+      if(str1[i][str1[i].length-1] === ' '){
+        str1[i] = str1[i].substring(0,str1[i].length-1);
       }
-    });
+    }
+    str1 = str1.join('\n');
+    if(str1 === str2){
+      return true;
+    }else{
+      return false;
+    }
+}
+
+router.post('/compileCode',async function(req,res){
+     console.log(req.body);
+    let solutions =[];
+    switch(req.body.language){
+         case 'c' :   for(let i=0;i<2;i++){
+                           let tcase = req.body.sampleCases[i];
+                           let stdin = tcase.i;
+                           let output = tcase.o;
+                           await c.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},(err, result) => {
+                              if(err){
+                                  console.log(err);
+                                  solutions.push(err);
+                              }
+                              else{
+                                  if(comparer(result.stdout,output)){
+                                    result.verdict = "Passed all test cases";
+                                    result.status = 1;
+                                  }else{
+                                    result.verdict = "Your code failed some of the test cases,try dry running or use the custom input/output to test your code";
+                                    result.status = 0;
+                                  }
+                                  solutions.push(result);
+                                } 
+                           });
+                        }
+                        res.json(solutions);
+                        break;
+         case 'java' : for(let i=0;i<2;i++){
+                           let tcase = req.body.sampleCases[i];
+                           let stdin = tcase.i;
+                           let output = tcase.o;
+                           await java.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},(err, result) => {
+                              if(err){
+                                  console.log(err);
+                                  solutions.push(err);
+                              }
+                              else{
+                                  if(comparer(result.stdout,output)){
+                                    result.verdict = "Passed all test cases";
+                                    result.status = 1;
+                                  }else{
+                                    result.verdict = "Your code failed some of the test cases,try dry running or use the custom input/output to test your code";
+                                    result.status = 0;
+                                  }
+                                  solutions.push(result);
+                                } 
+                           });
+                        }
+                        res.json(solutions);
+                        break;
+         case 'python' : for(let i=0;i<2;i++){
+                           let tcase = req.body.sampleCases[i];
+                           let stdin = tcase.i;
+                           let output = tcase.o;
+                           await python.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},(err, result) => {
+                              if(err){
+                                  console.log(err);
+                                  solutions.push(err);
+                              }
+                              else{
+                                  if(comparer(result.stdout,output)){
+                                    result.verdict = "Passed all test cases";
+                                    result.status = 1;
+                                  }else{
+                                    result.verdict = "Your code failed some of the test cases,try dry running or use the custom input/output to test your code";
+                                    result.status = 0;
+                                  }
+                                  solutions.push(result);
+                                } 
+                           });
+                        }
+                        res.json(solutions);
+                        break;
+         case 'c++' : for(let i=0;i<2;i++){
+                           let tcase = req.body.sampleCases[i];
+                           let stdin = tcase.i;
+                           let output = tcase.o;
+                           await cpp.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},(err, result) => {
+                              if(err){
+                                  console.log(err);
+                                  solutions.push(err);
+                              }
+                              else{
+                                  if(comparer(result.stdout,output)){
+                                    result.verdict = "Passed all test cases";
+                                    result.status = 1;
+                                  }else{
+                                    result.verdict = "Your code failed some of the test cases,try dry running or use the custom input/output to test your code";
+                                    result.status = 0;
+                                  }
+                                  solutions.push(result);
+                                } 
+                           });
+                        }
+                        res.json(solutions);
+                        break;
+         case 'javascript' : for(let i=0;i<2;i++){
+                               let tcase = req.body.sampleCases[i];
+                               let stdin = tcase.i;
+                               let output = tcase.o;
+                               await node.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},(err, result) => {
+                                  if(err){
+                                      console.log(err);
+                                      solutions.push(err);
+                                  }
+                                  else{
+                                      if(comparer(result.stdout,output)){
+                                        result.verdict = "Passed all test cases";
+                                        result.status = 1;
+                                      }else{
+                                        result.verdict = "Your code failed some of the test cases,try dry running or use the custom input/output to test your code";
+                                        result.status = 0;
+                                      }
+                                      solutions.push(result);
+                                    } 
+                               });
+                            }
+                            res.json(solutions);
+                            break;
+      }
 });
 
 module.exports = router;

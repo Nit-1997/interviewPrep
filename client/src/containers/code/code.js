@@ -1,50 +1,42 @@
 import React, { Component } from 'react';
 import './code.css';
 import axios from '../../axios';
-import {Form,Button,Jumbotron,Col,Container,Row,Image} from 'react-bootstrap';
+import {Form,Button,Jumbotron,Col,Container,Row,Image,Dropdown,Spinner} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
+import Code from '../../components/code/code';
 
-class Code extends Component {
+class Base extends Component {
   constructor() {
     super();
     this.state = {
-        code:''
+        testCases:[{i:'3\n1 2 3',o:'6'},{i:'4\n1 2 3 4',o:'10'},{i:'1\n5',o:'5'},{i:'',o:''},{i:'2\n1 2',o:'3'},{i:'2\n90 100',o:'190'}],
+        sampleCases:[{i:'3\n1 2 3',o:'6'},{i:'4\n1 2 3 4',o:'10'}],
+        title:'Find Sum',
+        description:'input n numbers and evaluate their sum and print it.Complete the simpleArraySum function in the editor below.It must return the sum of the array elements as an integer.simpleArraySum has the following parameter(s):',
+        inputFormat:'The first line contains an integer n denoting the size of the array.\nThe second line contains  n space-separated integers representing the array elements.',
+        constraints:'n>0 , arr[i]<=1000',
+        outputFormat:'Print the sum of the array elements as a single integer.',
+        sampleExample:{i:'3\n1 2 3',o:'6',explain:'sum of 1+2+3 = 6 hence 6 is the answer.'}
    }
   }
-
-  onChangeHandler = (e) => {
-      this.setState({[e.target.id]:e.target.value},()=>{
-        console.log(this.state);
-      })
-  }
-
-  onSubmitHandler = (e) =>{
-    const formData = {
-     code:this.state.code,
-   }
-     axios.post('/compileCode',formData)
-       .then(response => {
-         console.log(response.data);  
-      }).catch(error => {
-        console.log(error); 
-      });
-}
 
   render() {
     return (
-       <div className="coder">
-           <Form>
-              <Form.Group controlId="code" className="commHeader">
-                  <Form.Label>Content</Form.Label>
-                  <Form.Control as="textarea" className="editor" onChange={this.onChangeHandler} placeholder="Enter Code" />
-              </Form.Group>
-            <Button variant="primary" onClick ={this.onSubmitHandler} className="commHeader">
-             Compile
-           </Button>
-           </Form> 
-
+       <div>
+          <Code
+            {...this.props}
+            testCases = {this.state.testCases}
+            sampleCases = {this.state.sampleCases}
+            title = {this.state.title}
+            description = {this.state.description}
+            sampleExample= {this.state.sampleExample}
+            inputFormat = {this.state.inputFormat}
+            outputFormat={this.state.outputFormat}
+            constraints={this.state.constraints}
+         />
        </div>
     );
   }
 }
 
-export default Code;
+export default withRouter(Base);
