@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import starFull from '../../assets/star-full.png';
 import './course.css';
+import Stars from '../numStars/numStars';
 
 
 
@@ -28,25 +29,24 @@ class Course extends Component{
 
   render(){
      return(
-       <div>
-         <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={this.props.courseObj.image} />
-          <Card.Body>
-            <Card.Title className="titleCourse">{this.props.courseObj.title}</Card.Title>
-            <Card.Text className="commHeader">
-              {this.props.courseObj.details}
-            </Card.Text>
-                          <img src={starFull} className="icon babyz" />
-                          <img src={starFull} className="icon babyz" />
-                          <img src={starFull} className="icon babyz" />
-                          <img src={starFull} className="icon babyz" />
-                          <img src={starFull} className="icon babyz" />
+        <div className="col-md-4 col-sm-6 portfolio-item">
+              <a className="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                <div onClick ={this.startCourseHandler} className="portfolio-hover">
+                  <div className="portfolio-hover-content">
+                    <i className="fas fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                <img className="img-fluid" src={this.props.courseObj.image}  alt=""/>
+              </a>
+              <div className="portfolio-caption">
+                <h4>{this.props.courseObj.title}</h4>
+                <p className="text-muted">{this.props.courseObj.details}</p>
+                          <Stars number="5"/>
                           <br/>
             <Button variant="primary" className="xxx commHeader" onClick ={this.startCourseHandler}>Start Course</Button>
             <Button variant="success" className="xxx commHeader" onClick ={this.commentCourseHandler}>Comments</Button>
-          </Card.Body>
-        </Card>
-       </div>
+             </div>
+        </div>
      );
   }   
 }

@@ -34,7 +34,7 @@ class Create extends Component {
     formData.append('title',this.state.title);
     formData.append('details',this.state.details);
    
-    const url = 'http://localhost:7000/createCourse';
+    const url = 'https://prepzone.herokuapp.com/createCourse';
     axios.post(url,
           formData, {
             headers: {

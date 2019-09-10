@@ -13,7 +13,7 @@ class Landing extends Component {
     console.log(this.props);
     return (
      <div>
-      <div className="App-header">
+      <div>
        <Image loggedIn={this.state.isLoggedIn}/>
       </div>
      </div> 

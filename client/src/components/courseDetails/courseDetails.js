@@ -9,7 +9,7 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
 class CourseDetails extends Component{
    state = {
-     course:null,
+     course:'',
      isLoggedIn:this.props.loggedIn,
      links:[]
    }
@@ -54,22 +54,21 @@ class CourseDetails extends Component{
       if(this.state.links && this.state.links.length){
         baseComponent=(
           this.state.links.map(link =>(
-              <div>
-                <MDBContainer>
-                  <MDBRow>
-                    <MDBCol md="12"><h5 style={{ color: 'white'}}>{link.title}</h5></MDBCol>
-                    <MDBCol md="12"><Comp link = {link}/></MDBCol>
-                  </MDBRow>
-                </MDBContainer>
-             </div>
+              <div className="col-md-4 col-sm-6 portfolio-item">
+                    <a>
+                      <Comp link = {link}/>
+                    </a>
+                    <div className="portfolio-caption">
+                      <h4>{link.title}</h4>
+                   </div>
+              </div> 
           ))
         );
       }
     }else{
        baseComponent=(
-           <div>
-            <br/><br/>
-            <h1 style={{ color: 'white' }}>COURSES ONLY VISIBLE WHEN LOGGED IN</h1>
+           <div className="col-lg-12 text-center">
+                  <h2 className="section-heading text-uppercase">404 planet not found!!!</h2>
            </div>
        );
     }
@@ -80,21 +79,27 @@ class CourseDetails extends Component{
         button = (
             <div>
                <Button onClick={this.onclickhandler}>Add Link</Button>
+               <br/>
+               <br/>
             </div>
         );
       }
     }
      return(
-      <div className="commHeader">
-       <div className ="mainx">
-           <div className="x">
-            {button} 
-            </div>
-           <div className="baseComp">
-             {baseComponent}
-           </div>
-       </div>
-      </div>
+      <section className="bg-light page-section" id="portfolio">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-12 text-center">
+                  <h2 className="section-heading text-uppercase">{this.state.course.title}</h2>
+                  <h3 className="section-subheading text-muted">{this.state.course.details}</h3>
+                   {button}
+                </div>
+               </div>
+               <div class="row">
+                {baseComponent}
+               </div>
+             </div>
+        </section>
      );
   }   
 }

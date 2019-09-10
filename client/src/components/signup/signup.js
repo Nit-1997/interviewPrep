@@ -43,7 +43,7 @@ class Signup extends Component {
         formData.append('branch',this.state.branch);
         formData.append('year',this.state.year);
         formData.append('password',this.state.password);
-        const url = 'http://localhost:7000/create';
+        const url = 'https://prepzone.herokuapp.com/create';
         axios.post(url,
           formData, {
             headers: {

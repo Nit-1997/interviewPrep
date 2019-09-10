@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
 import Player from '../../components/youtube/youtube';
 import Pdf from '../../components/pdf/pdf';
-import './viewcomp.css';
+
 
 class ViewComp extends Component{
    state = {
@@ -27,7 +27,7 @@ class ViewComp extends Component{
           );
   	 }
      return(
-       <div className="mainxxx">
+       <div>
           {baseComp}
        </div>
      );

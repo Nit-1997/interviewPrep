@@ -20,6 +20,7 @@ class Login extends Component {
   }
 
   onSubmitHandler = (e) =>{
+     e.preventDefault();
     const formData = {
        username:this.state.username,
        password:this.state.password
@@ -48,30 +49,37 @@ class Login extends Component {
 
   render() {
     return (
-      <Form className="major">
-          <h1 className="title commHeader">Login</h1>
-          <Form.Group controlId="username">
-            <Form.Label className="commHeader">Email address</Form.Label>
-            <Form.Control className="commHeader" type="email" placeholder="Enter email" onChange={this.onChange}/>
-            <Form.Text className="text-muted" className="commHeader">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label className="commHeader">Password</Form.Label>
-            <Form.Control className="commHeader" type="password" placeholder="Password" onChange={this.onChange} />
-          </Form.Group>
-          <Button variant="primary" className="commHeader" onClick ={this.onSubmitHandler}>
-            Login
-         </Button>
-         <br/><br/>
-         <NavLink 
-                to='/forgetPass'
-                className="commHeader linker"
-         >
-            Forgot Password?
-        </NavLink>
-     </Form>
+      <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div className="col-md-8 col-lg-6">
+              <div className="login d-flex align-items-center py-5">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-9 col-lg-8 mx-auto">
+                      <h3 className="login-heading mb-4">Sign In</h3>
+                      <form onSubmit={this.onSubmitHandler}>
+                        <div className="form-label-group">
+                          <input onChange={this.onChange} type="email" id="username" className="form-control" placeholder="Email address" required autofocus/>
+                          <label for="username">Email address</label>
+                        </div>
+
+                        <div className="form-label-group">
+                          <input onChange={this.onChange} type="password" id="password" className="form-control" placeholder="Password" required/>
+                          <label for="password">Password</label>
+                        </div>
+                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                        <div className="text-center">
+                          <a className="small" href="">Forgot password?</a>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
   );
   }
 }

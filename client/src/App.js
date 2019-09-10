@@ -6,7 +6,7 @@ import Signup from './containers/signup/signup';
 import Courses from './containers/courses/courses';
 import Login from './containers/login/login';
 import ForgetPass from './containers/forgetPass/forgetPass';
-import About from './containers/about/about';
+import Team from './containers/team/team';
 import Code from './containers/code/code';
 import Create from './containers/create/create';
 import Header from './components/header/header';
@@ -68,13 +68,12 @@ class App extends Component {
 
   render() {
     return (
-       <div className="App">
+       <div>
        <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn} email={this.state.username} user={this.state.user}/>
          <header>
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/about" render={() => <About/>}/>
-              <Route path="/dummy" render={() => <Dummy/>}/>
+              <Route path="/team" render={() => <Team/>}/>
               <Route path="/code" render={() => <Code loggedIn={this.state.loggedIn}/>}/>
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
@@ -86,6 +85,44 @@ class App extends Component {
               <Route path="/addLinks" render={() => <AddLinks username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
            </Switch>
          </header>
+         <footer class="footer">
+              <div class="container">
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; prepZone 2019</span>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                      <li class="list-inline-item">
+                        <a href="#">
+                          <i class="fab fa-twitter"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#">
+                          <i class="fab fa-facebook-f"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#">
+                          <i class="fab fa-linkedin-in"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                      <li class="list-inline-item">
+                        <a href="#">Privacy Policy</a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#">Terms of Use</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+         </footer>
        </div>
     );
   }

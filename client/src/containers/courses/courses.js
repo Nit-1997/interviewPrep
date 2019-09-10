@@ -36,27 +36,30 @@ class Courses extends Component {
     if(this.state.isLoggedIn){
       baseComponent=(
           this.state.courses.map(course =>(
-              <div>
-                <MDBContainer>
-                  <MDBRow>
-                    <MDBCol md="12"><Course courseObj={course}/></MDBCol>
-                  </MDBRow>
-                </MDBContainer>
-             </div>
+            <Course courseObj={course}/>
           ))
       );
     }else{
        baseComponent=(
-           <div>
-          	<br/><br/>
-            <h1 style={{ color: 'white' }}>COURSES ONLY VISIBLE WHEN LOGGED IN</h1>
-           </div>
+                <div className="col-lg-12 text-center">
+                  <h2 className="section-heading text-uppercase">404 planet not found!!!</h2>
+                </div>
        );
     }
     return (
-       <div className="main">
-         {baseComponent}
-       </div>
+        <section className="bg-light page-section" id="portfolio">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-12 text-center">
+                  <h2 className="section-heading text-uppercase">Courses</h2>
+                  <h3 className="section-subheading text-muted">Best courses for those best jobs.</h3>
+                </div>
+               </div>
+               <div class="row">
+                {baseComponent}
+               </div>
+             </div>
+        </section>
     );
   }
 }

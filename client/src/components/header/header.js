@@ -80,7 +80,7 @@ class Header extends Component {
                               />
                       </Nav.Link>
                       <Nav.Link eventKey="1">
-                            <Button onClick={this.logout}>Logout</Button>
+                            <button className="btn" style={{'color':'white'}} onClick={this.logout}>Logout</button>
                        </Nav.Link>
                 </Nav>
               );            
@@ -112,9 +112,9 @@ class Header extends Component {
                    <Nav className="mr-auto"> 
                       <Nav.Link  eventKey="1">
                        <NavLink 
-                           to='/about'
+                           to='/team'
                         >
-                               About
+                               Team
                         </NavLink>
                        </Nav.Link>
                       <Nav.Link eventKey="1">
@@ -145,9 +145,9 @@ class Header extends Component {
                    <Nav className="mr-auto"> 
                       <Nav.Link eventKey="1">
                        <NavLink 
-                           to='/about'
+                           to='/team'
                         >
-                               About
+                               Team
                         </NavLink>
                        </Nav.Link>
                       <Nav.Link eventKey="1">
@@ -172,9 +172,9 @@ class Header extends Component {
                   <Nav className="mr-auto"> 
                         <Nav.Link eventKey="1">
                          <NavLink 
-                             to='/about'
+                             to='/team'
                           >
-                                 About
+                                 Team
                           </NavLink>
                          </Nav.Link>
                         <Nav.Link eventKey="1">
@@ -203,7 +203,7 @@ class Header extends Component {
       
   return(
      <div>
-      <Navbar collapseOnSelect expand="lg" className="commHeader" fixed="top" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="lg" className="commHeader" fixed="top" bg="dark" variant="dark">
        <NavLink 
                  to='/'
         >

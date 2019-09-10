@@ -14,7 +14,7 @@ class Pdf extends Component{
    }
   render(){
      return(
-         <div class="carder" onClick={this.openDocumentHandler}></div>
+         <div className="img-fluid carder" onClick={this.openDocumentHandler}></div>
      );
   }   
 }

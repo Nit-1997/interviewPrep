@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
 import YouTube from 'react-youtube';
-import './youtube.css';
+// import './youtube.css';
 
 class Youtuber extends Component{
    state = {
@@ -22,18 +22,16 @@ class Youtuber extends Component{
 
   render(){
     const opts = {
-      height: '200',
-      width: '300'
+      height: 'inherit',
+      width: 'inherit'
     }   
      return(
-       <div>
            <YouTube
               videoId={this.props.id}
               opts={opts}
               onStateChange={this.videoStateChange}
-              className="abc"
+              className="img-fluid"
             />
-       </div>
      );
   }   
 }

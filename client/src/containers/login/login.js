@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 const login = (props) =>{
 	console.log(props);
     return (
-      <div className="master">
+      <div>
          <Signin
             {...props} 
          />
