@@ -13,6 +13,7 @@ import Header from './components/header/header';
 import AddLinks from './components/addlinks/addlinks';
 import CourseDetails from './components/courseDetails/courseDetails';
 import AddComment from './containers/addcomment/addcomment';
+import Dummy from './containers/dummy/dummy';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
@@ -73,6 +74,7 @@ class App extends Component {
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
               <Route path="/about" render={() => <About/>}/>
+              <Route path="/dummy" render={() => <Dummy/>}/>
               <Route path="/code" render={() => <Code loggedIn={this.state.loggedIn}/>}/>
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>

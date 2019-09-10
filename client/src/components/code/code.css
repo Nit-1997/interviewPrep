@@ -25,6 +25,12 @@
     margin-top: 20px;
 }
 
+.form-group {
+     margin-bottom: 0px; 
+     justify-content: unset;
+     margin-top: 9px;
+     margin-bottom: 9px;
+}
 .langMiders{
     display: flex;
     flex-direction: column;
@@ -46,15 +52,11 @@
 
 #box2{
     background-color: #F0F0F0;
-    margin: 10px 0px 10px 0px;
-    padding: 8px 0px 0px 40px;
+    margin: 5px 35px 5px 35px;
+    padding: 0px 0px 0px 0px;
 }
 
-#box3{
-    background-color: #F0F0F0;
-    margin: 10px 0px 10px 0px;
-    padding: 8px 0px 0px 40px;
-}
+
 
 .probStat{
   font-size: 50px;
@@ -66,7 +68,7 @@
 }
 
 .rightSide{
-  margin-top: 60px;
+  margin-top: 80px;
 }
 
 .sampleResultsBox{
@@ -77,7 +79,7 @@
 .sampleResults1{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background: #49eb77;
-  height: 200px;
+  height: inherit;
 }
 
 .finalResultsBox{
@@ -100,17 +102,32 @@
 }
 
 .contentCodex{
-    font-weight: 600;
-    font-size: 40px;
-    color: olivedrab;
+    font-weight: 400;
+    font-size: 35px;
+    color: #505052;
 }
 
 .contentCodexScore{
     font-weight: 600;
     font-size: 70px;
-    color: olivedrab;
+    color: #5b5d63;
 }
 
 .sampleCaseBox{
   padding-top: 10px;
+}
+
+.fullScreen{
+  height: 37px;
+  width: 37px;
+  margin-top: 7px;
+  margin-left: 12px;
+}
+
+.fullScreen:hover {
+  box-shadow: 0 6px 10px 0 rgba(250, 252, 255, 0.5));
+}
+
+.rightDock{
+  text-align: end;
 }
