@@ -13,7 +13,6 @@ import Header from './components/header/header';
 import AddLinks from './components/addlinks/addlinks';
 import CourseDetails from './components/courseDetails/courseDetails';
 import AddComment from './containers/addcomment/addcomment';
-import Dummy from './containers/dummy/dummy';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
