@@ -84,37 +84,37 @@ class App extends Component {
               <Route path="/addLinks" render={() => <AddLinks username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
            </Switch>
          </header>
-         <footer class="footer">
-              <div class="container">
-                <div class="row align-items-center">
-                  <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; prepZone 2019</span>
+         <footer className="footer textVal">
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <span className="copyright">Copyright &copy; prepZone 2019</span>
                   </div>
-                  <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                      <li class="list-inline-item">
+                  <div className="col-md-4">
+                    <ul className="list-inline social-buttons">
+                      <li className="list-inline-item">
                         <a href="#">
-                          <i class="fab fa-twitter"></i>
+                          <i className="fab fa-twitter"></i>
                         </a>
                       </li>
-                      <li class="list-inline-item">
+                      <li className="list-inline-item">
                         <a href="#">
-                          <i class="fab fa-facebook-f"></i>
+                          <i className="fab fa-facebook-f"></i>
                         </a>
                       </li>
-                      <li class="list-inline-item">
+                      <li className="list-inline-item">
                         <a href="#">
-                          <i class="fab fa-linkedin-in"></i>
+                          <i className="fab fa-linkedin-in"></i>
                         </a>
                       </li>
                     </ul>
                   </div>
-                  <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                      <li class="list-inline-item">
+                  <div className="col-md-4">
+                    <ul className="list-inline quicklinks">
+                      <li className="list-inline-item">
                         <a href="#">Privacy Policy</a>
                       </li>
-                      <li class="list-inline-item">
+                      <li className="list-inline-item">
                         <a href="#">Terms of Use</a>
                       </li>
                     </ul>

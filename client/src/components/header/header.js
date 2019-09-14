@@ -203,7 +203,7 @@ class Header extends Component {
       
   return(
      <div>
-      <Navbar collapseOnSelect expand="lg" className="commHeader" fixed="top" bg="dark" variant="dark">
+      <Navbar  collapseOnSelect expand="lg" className="commHeader textVal" fixed="top" bg="dark" variant="dark">
        <NavLink 
                  to='/'
         >
