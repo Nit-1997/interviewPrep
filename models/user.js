@@ -11,7 +11,10 @@ const userSchema = new Schema({
       college:String,
       year:String,
       branch:String,
-      image:String
+      image:String,
+      solvedCompletely : [{
+                            id:String 
+                          }]
 })
 
 // Define schema methods

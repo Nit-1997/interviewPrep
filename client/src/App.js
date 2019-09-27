@@ -7,14 +7,17 @@ import Courses from './containers/courses/courses';
 import Login from './containers/login/login';
 import ForgetPass from './containers/forgetPass/forgetPass';
 import Team from './containers/team/team';
+import QuestionList from './containers/questionList/questionList';
 import Code from './containers/code/code';
 import Create from './containers/create/create';
 import Header from './components/header/header';
 import AddLinks from './components/addlinks/addlinks';
 import CourseDetails from './components/courseDetails/courseDetails';
 import AddComment from './containers/addcomment/addcomment';
+import AddQuestion from './containers/addquestion/addquestion';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 
 class App extends Component {
@@ -35,8 +38,36 @@ class App extends Component {
     this.getUser()
   }
 
+  componentDidUpdate(){
+    const cookies = new Cookies();
+    const username = cookies.get('username');
+    let loggedIn = cookies.get('loggedIn');
+    if(loggedIn === "true"){
+      loggedIn = true;
+    }else{
+      loggedIn = false;
+    }
+    if(this.state.loggedIn!== loggedIn){
+       this.setState({username:username,loggedIn:loggedIn},()=>{
+      console.log(this.state);
+    });
+    }
+  }
+
   updateUser (userObject) {
-    this.setState(userObject)
+    console.log(userObject)
+    //this.setState(userObject)
+    const cookies = new Cookies();
+    const username = cookies.get('username');
+    let loggedIn = cookies.get('loggedIn');
+    if(loggedIn === "true"){
+      loggedIn = true;
+    }else{
+      loggedIn = false;
+    }
+    this.setState({username:username,loggedIn:loggedIn},()=>{
+      console.log(this.state);
+    });
   }
 
   getUser() {
@@ -67,13 +98,15 @@ class App extends Component {
 
   render() {
     return (
-       <div>
+       <div className="commHeader">
        <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn} email={this.state.username} user={this.state.user}/>
          <header>
            <Switch>
               <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
               <Route path="/team" render={() => <Team/>}/>
+              <Route path="/questions" render={() => <QuestionList loggedIn={this.state.loggedIn}/>}/>
               <Route path="/code" render={() => <Code loggedIn={this.state.loggedIn}/>}/>
+              <Route path="/addQuestion" render={() => <AddQuestion loggedIn={this.state.loggedIn}/>}/>
               <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
               <Route path="/signup" render={() => <Signup/>}/>
               <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
@@ -112,10 +145,10 @@ class App extends Component {
                   <div className="col-md-4">
                     <ul className="list-inline quicklinks">
                       <li className="list-inline-item">
-                        <a href="#">Privacy Policy</a>
+                        <a href="#" style={{'color':'black'}}>Privacy Policy</a>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">Terms of Use</a>
+                        <a href="#" style={{'color':'black'}}>Terms of Use</a>
                       </li>
                     </ul>
                   </div>

@@ -16,7 +16,7 @@ class Comment extends Component {
     super();
     this.state = {
         content:'',
-        rating:'',
+        rating:'0',
         show:false,
         showRating:false,
         showToxic:false

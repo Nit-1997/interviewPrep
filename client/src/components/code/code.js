@@ -15,6 +15,7 @@ import 'brace/theme/monokai';
 import fullScreen from '../../assets/fullScreen.png';
 import reset from '../../assets/reset.jpeg';
 import Fullscreen from "react-full-screen";
+import Cookies from 'universal-cookie';
 
 class Code extends Component {
   constructor() {
@@ -132,10 +133,14 @@ class Code extends Component {
 
   onSubmitHandler = async (e) =>{
     try{
+    const cookies = new Cookies();
+    const username = cookies.get('username'); 
     let formData = {
        code:this.state.code,
        language:this.state.language,
-       testCases:this.props.testCases
+       testCases:this.props.testCases,
+       quesId:this.props.id,
+       username:username
     }
     this.setState({clicked:true});
     let response = await axios.post('/submitCode',formData);
@@ -213,7 +218,7 @@ onCustomHandler = (e) =>{
        // window.scrollTo(0,1000);
        sampleAnsComp = (
            <SampleTestCases
-             sampleExample = {this.props.sampleExample}
+             sampleExample = {this.props.sampleCases}
              response = {this.state.response}
             />
         );
@@ -309,6 +314,8 @@ onCustomHandler = (e) =>{
                     <p>
                       {this.props.description}
                     </p>
+                    <h4 className="contentCode">Difficulty :- <strong style={{'text-transform': 'uppercase','color':this.props.color}}>{this.props.difficulty}</strong></h4>
+                    <br/>
                     <h4 className="contentCode">Input Format:-</h4>
                     <p>
                       {this.props.inputFormat}
@@ -324,21 +331,40 @@ onCustomHandler = (e) =>{
                     <h4 className="contentCode">Sample Input:-</h4>
                     <Jumbotron id="box1">
                     <p> 
-                       {this.props.sampleExample.i}                      
+                       {this.props.sampleExample[0].i}                      
                     </p>
                     </Jumbotron>
                     <h4 className="contentCode">Sample Output:-</h4>
                     <Jumbotron id="box1">
                     <p> 
-                       {this.props.sampleExample.o}
+                       {this.props.sampleExample[0].o}
                     </p>
                     </Jumbotron>
                     <h4 className="contentCode">Explanation:-</h4>
                     <Jumbotron id="box1">
                     <p> 
-                       {this.props.sampleExample.explain}
+                       {this.props.sampleExample[0].explain}
                     </p>
                     </Jumbotron>
+                    <h4 className="contentCode">Sample Input:-</h4>
+                    <Jumbotron id="box1">
+                    <p> 
+                       {this.props.sampleExample[1].i}                      
+                    </p>
+                    </Jumbotron>
+                    <h4 className="contentCode">Sample Output:-</h4>
+                    <Jumbotron id="box1">
+                    <p> 
+                       {this.props.sampleExample[1].o}
+                    </p>
+                    </Jumbotron>
+                    <h4 className="contentCode">Explanation:-</h4>
+                    <Jumbotron id="box1">
+                    <p> 
+                       {this.props.sampleExample[1].explain}
+                    </p>
+                    </Jumbotron>
+
                 </div>
                 </Jumbotron>
               </Col>
@@ -360,7 +386,7 @@ onCustomHandler = (e) =>{
                           <option value="">Choose language</option>
                           <option value="c">C</option>
                           <option value="c++">C++</option>
-                          <option value="java">Java</option>
+                          {/*<option value="java">Java</option>*/}
                           <option value="python">Python</option>
                           <option value="javascript">Javascript(Node.js)</option>
                         </Form.Control>

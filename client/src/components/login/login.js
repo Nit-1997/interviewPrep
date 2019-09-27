@@ -1,15 +1,18 @@
 import React,{Component} from "react";
 import './login.css';
 import {NavLink} from 'react-router-dom';
-import {Form,Button} from 'react-bootstrap';
+import {Form,Button,Toast} from 'react-bootstrap';
 import axios from '../../axios';
+import ErrorImg from '../../assets/error.png';
+import Cookies from 'universal-cookie';
 
 class Login extends Component {
  constructor() {
     super();
     this.state = {
         username:'',
-        password:''
+        password:'',
+        show:false
    }
   }
 
@@ -35,6 +38,9 @@ class Login extends Component {
                         loggedIn: true,
                         username: response.data.username
                     });
+                    const cookies = new Cookies();
+                    cookies.set('username', response.data.username, { path: '/' }); 
+                    cookies.set('loggedIn', true, { path: '/' });
                     this.props.history.push({
                         pathname: '/',
                         state: { detail: response.data }
@@ -43,13 +49,37 @@ class Login extends Component {
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
+                window.scrollTo(0, 0);
+                this.setState({show:true},()=>{
+                  console.log(this.state.show);
+                });  
                 
             })
   }
 
   render() {
     return (
-      <div className="container-fluid">
+      <div>
+       <Toast
+        onClose={() => this.setState({show:false})}
+        show={this.state.show} delay={4000} autohide
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+        }}
+      >
+          <Toast.Header>
+              <img src={ErrorImg} className="rounded mr-2 toastImg" alt="" />
+              <strong className="mr-auto">Invalid details</strong>
+              <small>just now</small>
+          </Toast.Header>
+
+          <Toast.Body>
+             username or password is incorrect
+          </Toast.Body>
+      </Toast>
+      <div className="container-fluid commHeader">
           <div className="row no-gutter">
             <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
             <div className="col-md-8 col-lg-6">
@@ -80,6 +110,7 @@ class Login extends Component {
             </div>
           </div>
        </div>
+      </div>
   );
   }
 }

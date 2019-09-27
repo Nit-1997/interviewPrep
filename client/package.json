@@ -24,7 +24,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-toastr": "^3.0.0",
-    "react-youtube": "^7.9.0"
+    "react-youtube": "^7.9.0",
+    "universal-cookie": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

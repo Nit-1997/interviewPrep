@@ -34,6 +34,7 @@ class Signup extends Component {
   }
 
   onSubmitHandler = (e) =>{
+     e.preventDefault();
     if(this.state.password === this.state.confirm){
         const formData = new FormData();
         formData.append('image',this.state.image);
@@ -77,7 +78,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
+      <div className="commHeader">
          <Toast
         onClose={() => this.setState({show:false})}
         show={this.state.show} delay={4000} autohide
@@ -99,75 +100,86 @@ class Signup extends Component {
       </Toast>
 
 
-      <Form className="major">
-          <h1 className="title commHeader">Sign up</h1>
-          
-          <Form.Group controlId="image" className="commHeader">
-            <Form.Label>Profile Picture</Form.Label>
-            <Form.Control as="input" type="file"  onChange={this.onChangeHandlerFile} placeholder="Enter Name" />
-          </Form.Group>
+      <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div className="col-md-8 col-lg-6">
+              <div className="login d-flex align-items-center py-5">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-9 col-lg-8 mx-auto">
+                      <h3 className="login-heading mb-4">Sign Up</h3>
+                      <form onSubmit={this.onSubmitHandler}>
+                        
+                        <div className="form-label-group">
+                          <input onChange={this.onChangeHandler} type="email" id="email" className="form-control" placeholder="Email address" required autofocus/>
+                          <label for="email">Email address</label>
+                        </div>
 
-          <Form.Group controlId="email">
-            <Form.Label className="commHeader">Email address</Form.Label>
-            <Form.Control className="commHeader" type="email" onChange={this.onChangeHandler} placeholder="Enter email" />
-            <Form.Text className="text-muted" className="commHeader">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="name">
-            <Form.Label className="commHeader">Name</Form.Label>
-            <Form.Control type="text"  onChange={this.onChangeHandler} className="commHeader" placeholder="Enter Name" />
-          </Form.Group>  
-          
-          <Form.Group controlId="college">
-            <Form.Label className="commHeader">College</Form.Label>
-            <Form.Control as="select" onChange={this.onChangeHandler} className="commHeader">
-              <option value="">Choose...</option>
-              <option value="SJCE">SJCE</option>
-              <option value="NIE">NIE</option>
-              <option value="VVCE">VVCE</option>
-              <option value="Others">Others</option>
-            </Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="branch">
-            <Form.Label className="commHeader">Branch</Form.Label>
-            <Form.Control as="select" onChange={this.onChangeHandler} className="commHeader">
-              <option value="">Choose...</option>
-              <option value="CSE">CSE</option>
-              <option value="ISE">ISE</option>
-              <option value="ECE">ECE</option>
-              <option value="EEE">EEE</option>
-            </Form.Control>
-          </Form.Group>
+                       <div className="form-label-group">
+                            <input className="form-control" onChange={this.onChangeHandlerFile} type="file" id="image" name="image" accept="image/*" required/>
+                            <label for="username">Upload Avatar</label>
+                       </div>
+                       
+                        <div className="form-label-group">
+                          <input onChange={this.onChangeHandler} type="text" id="name" className="form-control" placeholder="Enter name" required autofocus/>
+                          <label for="name">Name</label>
+                        </div>
+                       
+                         <div className="form-group">
+                          <select onChange={this.onChangeHandler} id="college" className="form-control extra" required autofocus>
+                              <option disabled selected>College</option>
+                              <option value="SJCE">SJCE</option>
+                              <option value="NIE">NIE</option>
+                              <option value="VVCE">VVCE</option>
+                              <option value="Others">Others</option>
+                          </select>
+                        </div>
 
 
-           <Form.Group controlId="year">
-            <Form.Label className="commHeader">Year</Form.Label>
-            <Form.Control as="select" onChange={this.onChangeHandler} className="commHeader">
-              <option value="">Choose...</option>
-              <option value="1">First</option>
-              <option value="2">Second</option>
-              <option value="3">Third</option>
-              <option value="4">Fourth</option>
-            </Form.Control>
-          </Form.Group>
+                       <div className="form-group">
+                          <select onChange={this.onChangeHandler} id="branch" className="form-control extra" required autofocus>
+                              <option disabled selected>Select Branch</option>
+                              <option value="CSE">CSE</option>
+                              <option value="ISE">ISE</option>
+                              <option value="ECE">ECE</option>
+                              <option value="EEE">EEE</option>
+                              <option value="EI">EI</option>
+                              <option value="MECH">MECH</option>
+                              <option value="IP">IP</option>
+                              <option value="CIVIL">CIVIL</option>
+                              <option value="CTM">CTM</option>
+                              <option value="ENV">ENV</option>
+                          </select>
+                        </div>
 
-          <Form.Group controlId="password">
-            <Form.Label className="commHeader">Password</Form.Label>
-            <Form.Control className="commHeader" type="password" placeholder="Password" onChange={this.onChangeHandler} />
-          </Form.Group>
+                        <div className="form-group">
+                          <select onChange={this.onChangeHandler} id="year" className="form-control extra" required autofocus>
+                              <option disabled selected>Year</option>
+                              <option value="1">First Year</option>
+                              <option value="2">Second Year</option>
+                              <option value="3">Third Year</option>
+                              <option value="4">Fourth Year</option>
+                          </select>
+                        </div>
 
-          <Form.Group controlId="confirm">
-            <Form.Label className="commHeader">Confirm Password</Form.Label>
-            <Form.Control className="commHeader" type="password" placeholder="Confirm Password" onChange={this.onChangeHandler} />
-          </Form.Group>
-
-          <Button variant="primary"  className="commHeader" onClick ={this.onSubmitHandler}>
-            Submit
-         </Button>
-     </Form>
+                        <div className="form-label-group">
+                          <input onChange={this.onChangeHandler} type="password" id="password" className="form-control" placeholder="Password" required/>
+                          <label for="password">Password</label>
+                        </div>
+                        <div className="form-label-group">
+                          <input onChange={this.onChangeHandler} type="password" id="confirm" className="form-control" placeholder="Confirm Password" required/>
+                          <label for="confirm">Confirm Password</label>
+                        </div>
+                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign Up</button>          
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
      </div>
     );
   }

@@ -27,8 +27,11 @@ app.use(passport.session());
 
 const user = require('./routes/user');
 const courses = require('./routes/courses');
+const code = require('./routes/code');
+
 app.use('/', user);
 app.use('/', courses);
+app.use('/',code);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));

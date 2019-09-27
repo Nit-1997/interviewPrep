@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 import './header.css';
 import { Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
 import axios from '../../axios';
+import Cookies from 'universal-cookie';
 
 class Header extends Component {
        constructor() {
@@ -39,8 +40,11 @@ class Header extends Component {
         axios.post('/getUserInfo',formData)
         .then(response => {
           let image = '';
-          this.setState({user:response.data},()=>{
-             image = this.state.user[0].image;
+          this.setState({user:response.data[0]},()=>{
+            const cookies = new Cookies();
+                  cookies.set('user',response.data[0],{ path: '/' }); 
+             image =cookies.get('user',{ path: '/' });
+             image = image.image;
           });
           this.setState({image:image},()=>{
               console.log(this.state.image)
@@ -53,9 +57,15 @@ class Header extends Component {
     logout(event) {
         event.preventDefault()
         console.log('logging out')
+        //console.log(cookies.get('user',{ path: '/' }));
+ 
         axios.post('/logout').then(response => {
           console.log(response.data)
           if (response.status === 200) {
+            const cookies = new Cookies();
+                  cookies.remove('username', { path: '/' }); 
+                  cookies.remove('loggedIn', { path: '/' });
+                  cookies.remove('user', { path: '/' });
             this.props.updateUser({
               loggedIn: false,
               username: null
@@ -128,12 +138,19 @@ class Header extends Component {
                         <NavLink 
                            to='/createCourse'
                         >
-                              Add 
+                              Add Course
+                        </NavLink>
+                     </Nav.Link>
+                   <Nav.Link eventKey="1">
+                        <NavLink 
+                           to='/addQuestion'
+                        >
+                              Add Question
                         </NavLink>
                      </Nav.Link>
                      <Nav.Link eventKey="1">
                   <NavLink 
-                     to='/code'
+                     to='/questions'
                   >
                          Code
                   </NavLink>
@@ -159,7 +176,7 @@ class Header extends Component {
                      </Nav.Link>
                <Nav.Link eventKey="1">
                   <NavLink 
-                     to='/code'
+                     to='/questions'
                   >
                          Code
                   </NavLink>
@@ -181,18 +198,14 @@ class Header extends Component {
                                 Courses 
                        </Nav.Link>
                 <Nav.Link eventKey="1">
-                  <NavLink 
-                     to='/code'
-                  >
                          Code
-                  </NavLink>
                </Nav.Link>
                     </Nav> 
          );
       }
 
       let flasher;
-      let text = 'login to view courses';  
+      let text = 'login to view courses and solve coding problems';  
       if(!this.props.loggedIn){
          flasher = (
            <Alert variant="danger" className="commHeader">

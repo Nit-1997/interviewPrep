@@ -1,17 +1,17 @@
 //import './signup.css';
 import React from 'react';
-import Register from '../../components/signup/signup';
+import AddQuestion from '../../components/addquestion/addquestion';
 import {withRouter} from 'react-router-dom';
 
-const signup =(props)=> {
+const addQuestion =(props)=> {
     console.log(props);
     return (
       <div >
-         <Register 
+         <AddQuestion 
              {...props} 
           />
       </div>
     );
  }
 
-export default withRouter(signup);
+export default withRouter(addQuestion);

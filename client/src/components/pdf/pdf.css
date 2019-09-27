@@ -11,3 +11,13 @@
 .carder:hover{
   box-shadow: 0px 9px 9px 0px rgba(0,0,0,0.7);
 }
+
+
+.quesCarder{
+  transition: all .25s linear;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
+}
+
+.quesCarder:hover{
+   box-shadow: 0px 9px 9px 0px rgba(0,0,0,0.7);
+}
