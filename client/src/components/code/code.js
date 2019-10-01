@@ -17,6 +17,7 @@ import reset from '../../assets/reset.jpeg';
 import Fullscreen from "react-full-screen";
 import Cookies from 'universal-cookie';
 
+
 class Code extends Component {
   constructor() {
     super();
@@ -133,19 +134,16 @@ class Code extends Component {
 
   onSubmitHandler = async (e) =>{
     try{
-    const cookies = new Cookies();
-    const username = cookies.get('username'); 
     let formData = {
        code:this.state.code,
        language:this.state.language,
        testCases:this.props.testCases,
        quesId:this.props.id,
-       username:username
+       username:this.props.user.username
     }
     this.setState({clicked:true});
     let response = await axios.post('/submitCode',formData);
-    let data = response.data;
-     this.setState({response:data,isSubmit:true,isResult:false,isCustomResult:false,customControl:false,clicked:false},()=>{
+     this.setState({response:response.data,isSubmit:true,isResult:false,isCustomResult:false,customControl:false,clicked:false},()=>{
           console.log(this.state.response);
      });
   }catch(error){
@@ -439,4 +437,5 @@ onCustomHandler = (e) =>{
   }
 }
 
-export default withRouter(Code);
+
+export default (Code);

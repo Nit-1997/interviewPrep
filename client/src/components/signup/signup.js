@@ -1,9 +1,11 @@
 import React,{ Component } from "react";
 import './signup.css';
 import  { Redirect } from 'react-router-dom'
-import {Form,Button,Toast} from 'react-bootstrap';
+import {Form,Button,Toast,Spinner} from 'react-bootstrap';
 import ErrorImg from '../../assets/error.png';
 import axios from 'axios';
+import * as actions from '../../store/actions/index';
+import {connect} from 'react-redux';
 
 class Signup extends Component {
   constructor() {
@@ -44,30 +46,10 @@ class Signup extends Component {
         formData.append('branch',this.state.branch);
         formData.append('year',this.state.year);
         formData.append('password',this.state.password);
-        const url = 'https://prepzone.herokuapp.com/create';
-        axios.post(url,
-          formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-          ).then(response=>{
-           if (!response.data.errmsg) {
-            console.log('successful signup')
-            console.log(response.data);
-            this.props.history.push({
-              pathname: '/login',
-              state: { detail: response.data }
-            });
-          } else {
-            console.log('username already taken')
-          }
-        }).catch(error => {
-          console.log('signup error: ')
-          console.log(error)
-        });
-
-
+        this.props.onSignup(formData,this.state.email,this.state.password);
+        // this.props.history.push({
+        //       pathname: '/'
+        //  });
     }else{
       window.scrollTo(0, 0);
       this.setState({show:true},()=>{
@@ -77,39 +59,16 @@ class Signup extends Component {
   }
 
   render() {
-    return (
-      <div className="commHeader">
-         <Toast
-        onClose={() => this.setState({show:false})}
-        show={this.state.show} delay={4000} autohide
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-        }}
-      >
-          <Toast.Header>
-              <img src={ErrorImg} className="rounded mr-2 toastImg" alt="" />
-              <strong className="mr-auto">Password Mistmatch</strong>
-              <small>just now</small>
-          </Toast.Header>
-
-          <Toast.Body>
-             Passwords don't match
-          </Toast.Body>
-      </Toast>
-
-
-      <div className="container-fluid">
-          <div className="row no-gutter">
-            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
-            <div className="col-md-8 col-lg-6">
-              <div className="login d-flex align-items-center py-5">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-9 col-lg-8 mx-auto">
-                      <h3 className="login-heading mb-4">Sign Up</h3>
-                      <form onSubmit={this.onSubmitHandler}>
+    let baseComp;
+    if(this.props.loading){
+       baseComp = (
+          <div style={{'text-align':'center'}}>
+                   <Spinner  style={{'height':'100px','width':'100px'}} animation="border"/>         
+           </div>
+        ) 
+    }else{
+      baseComp = (
+        <form onSubmit={this.onSubmitHandler}>
                         
                         <div className="form-label-group">
                           <input onChange={this.onChangeHandler} type="email" id="email" className="form-control" placeholder="Email address" required autofocus/>
@@ -173,6 +132,41 @@ class Signup extends Component {
                         </div>
                         <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign Up</button>          
                       </form>
+      )
+    }
+    return (
+      <div className="commHeader">
+         <Toast
+        onClose={() => this.setState({show:false})}
+        show={this.state.show} delay={4000} autohide
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+        }}
+      >
+          <Toast.Header>
+              <img src={ErrorImg} className="rounded mr-2 toastImg" alt="" />
+              <strong className="mr-auto">Password Mistmatch</strong>
+              <small>just now</small>
+          </Toast.Header>
+
+          <Toast.Body>
+             Passwords don't match
+          </Toast.Body>
+      </Toast>
+
+
+      <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div className="col-md-8 col-lg-6">
+              <div className="login d-flex align-items-center py-5">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-9 col-lg-8 mx-auto">
+                      <h3 className="login-heading mb-4">Sign Up</h3>
+                        {baseComp}
                     </div>
                   </div>
                 </div>
@@ -185,4 +179,19 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+const mapDispatchToProps = dispatch =>{
+  return{
+    onSignup:(formData,username,password) => dispatch(actions.signup(formData,username,password))
+  }
+}
+
+const mapStateToProps = state =>{
+    return{
+     loading:state.auth.loading,
+     error:state.auth.error,
+     user:state.auth.user
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Signup);

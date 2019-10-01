@@ -5,6 +5,9 @@ import Course from '../../components/course/course';
 import './courses.css';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import axios from '../../axios';
+import * as actions from '../../store/actions/index';
+import {connect} from 'react-redux';
+
 
 class Courses extends Component {
  state = {
@@ -12,15 +15,16 @@ class Courses extends Component {
  	  isLoggedIn:this.props.loggedIn
   }
   componentDidMount(){
-  axios.get('/getCourses')
-    .then(response => {
-      this.setState({courses:response.data},()=>{
-        console.log(this.state);
-      });
-    })
-    .catch(error => {
-         console.log(error);
-    });
+  // axios.get('/getCourses')
+  //   .then(response => {
+  //     this.setState({courses:response.data},()=>{
+  //       console.log(this.state);
+  //     });
+  //   })
+  //   .catch(error => {
+  //        console.log(error);
+  //   });
+   this.setState({courses:this.props.courses});
   }
 
   componentDidUpdate(){
@@ -63,5 +67,15 @@ class Courses extends Component {
     );
   }
 }
+const mapStateToProps = state =>{
+  if(state.auth.user === null){
+    console.log('no user is present in session');
+  }else{
+    return{
+      courses:state.course.courses
+    }
+  }
+}
 
-export default withRouter(Courses);
+export default connect(mapStateToProps)(withRouter(Courses));
+

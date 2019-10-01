@@ -20,7 +20,7 @@ class Base extends Component {
   render() {
     let baseComp;
     if(this.props.loggedIn){
-      console.log(this.props)
+      console.log(this.props.location.state.detail)
      baseComp =(
            <Code
             {...this.props}
@@ -32,10 +32,11 @@ class Base extends Component {
             inputFormat = {this.props.location.state.detail.inputFormat}
             outputFormat={this.props.location.state.detail.outputFormat}
             constraints={this.props.location.state.detail.constraints}
-            correctCode={this.props.location.state.detail.correctCode}
+            correctCode={this.props.location.state.detail.correctCode[0]}
             id={this.props.location.state.detail._id}
             difficulty={this.props.location.state.detail.difficulty}
             color={this.props.location.state.detail.color}
+            user = {this.props.user}
          />
        )
        }else{

@@ -228,6 +228,7 @@ router.post('/compileCodeCustom',async function(req,res){
     let solutions = [];
     let stdin;
     let output;
+    console.log(req.body);
     switch(req.body.language){
          case 'c' :        stdin = req.body.customCase;
                            output = '';
@@ -347,15 +348,18 @@ router.post('/compileCodeCustom',async function(req,res){
                                   console.log(err);
                                   res.json(err);
                               }else{
-                                 output = await result.stdout;
-                              }
+                                console.log(result);
+                                 output = result.stdout
+                                 console.log(result.stdout);                              }
                              });
-                            await cpp.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},(err, result) => {
+                            await cpp.runSource(req.body.code,{stdin:stdin,compileTimeout:3000},async(err, result) => {
                               if(err){
                                   console.log(err);
                                   res.json(err);
                               }
                               else{
+                                 // console.log(result.stdout);
+                                  console.log(output);
                                   if(comparer(result.stdout,output)){
                                     result.verdict = "Accepted";
                                     result.status = 1;
