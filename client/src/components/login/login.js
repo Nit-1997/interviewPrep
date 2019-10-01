@@ -1,10 +1,12 @@
 import React,{Component} from "react";
 import './login.css';
 import {NavLink} from 'react-router-dom';
-import {Form,Button,Toast} from 'react-bootstrap';
+import {Form,Button,Toast,Spinner} from 'react-bootstrap';
 import axios from '../../axios';
 import ErrorImg from '../../assets/error.png';
 import Cookies from 'universal-cookie';
+import * as actions from '../../store/actions/index';
+import {connect} from 'react-redux';
 
 class Login extends Component {
  constructor() {
@@ -28,36 +30,41 @@ class Login extends Component {
        username:this.state.username,
        password:this.state.password
     }
-    axios.post('/login',formData)
-            .then(response => {
-                console.log('login response: ')
-                console.log(response)
-                if (response.status === 200) {
-                    // update App.js state
-                    this.props.updateUser({
-                        loggedIn: true,
-                        username: response.data.username
-                    });
-                    const cookies = new Cookies();
-                    cookies.set('username', response.data.username, { path: '/' }); 
-                    cookies.set('loggedIn', true, { path: '/' });
-                    this.props.history.push({
-                        pathname: '/',
-                        state: { detail: response.data }
-                    });       
-                }
-            }).catch(error => {
-                console.log('login error: ')
-                console.log(error);
-                window.scrollTo(0, 0);
-                this.setState({show:true},()=>{
-                  console.log(this.state.show);
-                });  
-                
-            })
+    this.props.onLogin(formData);
+    // if(this.props.user){
+    //   this.props.history.push({
+    //           pathname: '/'
+    //   });
+    // }
   }
 
   render() {
+    let baseComp;
+    if(this.props.loading){
+       baseComp = (
+          <div style={{'text-align':'center'}}>
+                   <Spinner  style={{'height':'100px','width':'100px'}} animation="border"/>         
+           </div>
+        ) 
+    }else{
+      baseComp = (
+         <form onSubmit={this.onSubmitHandler}>
+                        <div className="form-label-group">
+                          <input onChange={this.onChange} type="email" id="username" className="form-control" placeholder="Email address" required autofocus/>
+                          <label for="username">Email address</label>
+                        </div>
+
+                        <div className="form-label-group">
+                          <input onChange={this.onChange} type="password" id="password" className="form-control" placeholder="Password" required/>
+                          <label for="password">Password</label>
+                        </div>
+                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                        <div className="text-center">
+                          <a style={{'color':'black'}} className="small" href="">Forgot password?</a>
+                        </div>
+         </form>
+      )
+    }
     return (
       <div>
        <Toast
@@ -88,21 +95,7 @@ class Login extends Component {
                   <div className="row">
                     <div className="col-md-9 col-lg-8 mx-auto">
                       <h3 className="login-heading mb-4">Sign In</h3>
-                      <form onSubmit={this.onSubmitHandler}>
-                        <div className="form-label-group">
-                          <input onChange={this.onChange} type="email" id="username" className="form-control" placeholder="Email address" required autofocus/>
-                          <label for="username">Email address</label>
-                        </div>
-
-                        <div className="form-label-group">
-                          <input onChange={this.onChange} type="password" id="password" className="form-control" placeholder="Password" required/>
-                          <label for="password">Password</label>
-                        </div>
-                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
-                        <div className="text-center">
-                          <a className="small" href="">Forgot password?</a>
-                        </div>
-                      </form>
+                        {baseComp}
                     </div>
                   </div>
                 </div>
@@ -115,4 +108,19 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch =>{
+  return{
+    onLogin:(formData) => dispatch(actions.login(formData))
+  }
+}
+const mapStateToProps = state =>{
+    return{
+     loading:state.auth.loading,
+     error:state.auth.error,
+     user:state.auth.user
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
+
+

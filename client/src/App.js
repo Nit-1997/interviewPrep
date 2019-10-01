@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Container,Button} from 'react-bootstrap';
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
 import Landing from './containers/landing/landing';
 import Signup from './containers/signup/signup';
 import Courses from './containers/courses/courses';
@@ -18,104 +18,83 @@ import AddQuestion from './containers/addquestion/addquestion';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import {connect} from 'react-redux';
+import * as actions from './store/actions/index';
+
 
 
 class App extends Component {
  constructor() {
     super()
     this.state = {
-      loggedIn: false,
-      username: null,
-      user:null
+      
     }
-
-    this.getUser = this.getUser.bind(this)
-    this.componentDidMount = this.componentDidMount.bind(this)
-    this.updateUser = this.updateUser.bind(this)
   }
 
   componentDidMount() {
-    this.getUser()
+    if(this.props.loggedIn){
+      //this.props.fetchQues(this.props.user.username);
+      this.props.fetchCourses();
+    }
+    this.props.onTryAutoSignIn();
   }
 
   componentDidUpdate(){
-    const cookies = new Cookies();
-    const username = cookies.get('username');
-    let loggedIn = cookies.get('loggedIn');
-    if(loggedIn === "true"){
-      loggedIn = true;
-    }else{
-      loggedIn = false;
-    }
-    if(this.state.loggedIn!== loggedIn){
-       this.setState({username:username,loggedIn:loggedIn},()=>{
-      console.log(this.state);
-    });
+    console.log('token');
+    console.log(this.props.token); 
+    if(this.props.loggedIn){
+     // this.props.fetchQues(this.props.user.username);
+       this.props.fetchCourses();
     }
   }
-
-  updateUser (userObject) {
-    console.log(userObject)
-    //this.setState(userObject)
-    const cookies = new Cookies();
-    const username = cookies.get('username');
-    let loggedIn = cookies.get('loggedIn');
-    if(loggedIn === "true"){
-      loggedIn = true;
-    }else{
-      loggedIn = false;
-    }
-    this.setState({username:username,loggedIn:loggedIn},()=>{
-      console.log(this.state);
-    });
-  }
-
-  getUser() {
-    axios.get('/').then(response => {
-      console.log('Get user response: ')
-      console.log(response.data)
-      if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
-
-        this.setState({
-          loggedIn: true,
-          username: response.data.user.username,
-          user: response.data.user
-        },()=>{
-          console.log(this.state);
-        })
-      } else {
-        console.log('Get user: no user');
-        this.setState({
-          loggedIn: false,
-          username: null
-        })
-      }
-    })
-  }
-
-
 
   render() {
+    let routes = (
+      <Switch>
+        <Route path="/" exact render={() => <Landing loggedIn={this.props.loggedIn}/>}/>
+        <Route path="/team" render={() => <Team/>}/>
+        <Route path="/signup" render={() => <Signup/>}/>
+        <Route path="/login"  render={() => <Login/>} />
+        <Redirect to="/" />
+      </Switch>
+    );
+    if ( this.props.loggedIn ) {
+      if(this.props.user.username === 'ntnbhat9@gmail.com'){
+          routes = (
+                      <Switch>
+                            <Route path="/" exact render={() => <Landing loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/team" render={() => <Team/>}/>
+                            <Route path="/questions" render={() => <QuestionList user={this.props.user} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/code" render={() => <Code user = {this.props.user} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/addQuestion" render={() => <AddQuestion loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/courses" render={() => <Courses loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/createCourse"  render={() => <Create loggedIn = {this.props.loggedIn}/>} />
+                            <Route path="/singleCourse" render={() => <CourseDetails username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/addcomment" render={() => <AddComment username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/addLinks" render={() => <AddLinks username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Redirect to="/" />
+                      </Switch>
+                    );
+      }else{
+          routes = (
+                      <Switch>
+                            <Route path="/" exact render={() => <Landing loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/team" render={() => <Team/>}/>
+                            <Route path="/questions" render={() => <QuestionList user={this.props.user} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/code" render={() => <Code user = {this.props.user} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/courses" render={() => <Courses loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/singleCourse" render={() => <CourseDetails username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/addcomment" render={() => <AddComment username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Redirect to="/" />
+                      </Switch>
+                    );
+      }
+    }
     return (
        <div className="commHeader">
-       <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn} email={this.state.username} user={this.state.user}/>
+       <Header loggedIn={this.props.loggedIn} user={this.props.user}/>
          <header>
-           <Switch>
-              <Route path="/" exact render={() => <Landing loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/team" render={() => <Team/>}/>
-              <Route path="/questions" render={() => <QuestionList loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/code" render={() => <Code loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/addQuestion" render={() => <AddQuestion loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/courses" render={() => <Courses loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/signup" render={() => <Signup/>}/>
-              <Route path="/login"  render={() => <Login updateUser={this.updateUser}/>} />
-              <Route path="/forgetPass"  render={() => <ForgetPass updateUser={this.updateUser}/>} />
-              <Route path="/createCourse"  render={() => <Create username={this.state.username} loggedIn = {this.state.loggedIn}/>} />
-              <Route path="/singleCourse" render={() => <CourseDetails username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/addcomment" render={() => <AddComment username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
-              <Route path="/addLinks" render={() => <AddLinks username={this.state.username} loggedIn={this.state.loggedIn}/>}/>
-           </Switch>
+            {routes}
          </header>
          <footer className="footer textVal">
               <div className="container">
@@ -160,4 +139,24 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch =>{
+  return{
+    //fetchQues: (username)=>dispatch(actions.fetchQuestions(username)),
+    fetchCourses:(username)=>dispatch(actions.fetchCourses()),
+    onTryAutoSignIn: () => dispatch( actions.authCheckState() )
+  }
+}
+
+const mapStateToProps = state =>{
+  if(state.user === null){
+    console.log('no user is present in session');
+  }else{
+    return{
+      user:state.auth.user,
+      loggedIn:state.auth.loggedIn,
+      token:state.auth.token
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
