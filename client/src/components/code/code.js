@@ -143,6 +143,9 @@ class Code extends Component {
     }
     this.setState({clicked:true});
     let response = await axios.post('/submitCode',formData);
+     if(response.data.score === 100){
+        localStorage.setItem(this.props.id,this.props.id);
+     }
      this.setState({response:response.data,isSubmit:true,isResult:false,isCustomResult:false,customControl:false,clicked:false},()=>{
           console.log(this.state.response);
      });

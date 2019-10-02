@@ -33,18 +33,24 @@ class App extends Component {
 
   componentDidMount() {
     if(this.props.loggedIn){
-      //this.props.fetchQues(this.props.user.username);
+      this.props.fetchQues(this.props.user.username);
       this.props.fetchCourses();
+      console.log(this.props.solvedQuestions);
+      console.log(this.props.questions);
     }
     this.props.onTryAutoSignIn();
   }
 
-  componentDidUpdate(){
-    console.log('token');
-    console.log(this.props.token); 
+  async componentDidUpdate(){
     if(this.props.loggedIn){
-     // this.props.fetchQues(this.props.user.username);
-       this.props.fetchCourses();
+      if(!localStorage.getItem('quesData')){
+        await this.props.fetchQues(this.props.user.username);
+        await this.props.fetchCourses();   
+      }
+      //  await this.props.fetchQues(this.props.user.username);
+      //  await this.props.fetchCourses();
+      //  console.log(this.props.solvedQuestions);
+      // console.log(this.props.questions);
     }
   }
 
@@ -141,7 +147,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch =>{
   return{
-    //fetchQues: (username)=>dispatch(actions.fetchQuestions(username)),
+    fetchQues: (username)=>dispatch(actions.fetchQuestions(username)),
     fetchCourses:(username)=>dispatch(actions.fetchCourses()),
     onTryAutoSignIn: () => dispatch( actions.authCheckState() )
   }
@@ -154,7 +160,9 @@ const mapStateToProps = state =>{
     return{
       user:state.auth.user,
       loggedIn:state.auth.loggedIn,
-      token:state.auth.token
+      token:state.auth.token,
+      questions:state.ques.questions,
+      solvedQuestions:state.ques.solvedQuestions
     }
   }
 }

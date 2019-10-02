@@ -48,6 +48,7 @@ export const fetchQuestions = (username) =>{
        console.log(error);
      });
      console.log(questions);
+    localStorage.setItem('quesData',  JSON.stringify(questions));
     dispatch(quesSuccess(questions));
 	};
 }
