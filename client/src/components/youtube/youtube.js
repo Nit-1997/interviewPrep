@@ -22,15 +22,15 @@ class Youtuber extends Component{
 
   render(){
     const opts = {
-      height: 'inherit',
-      width: 'inherit'
+      height: '100%',
+      width: '100%'
     }   
      return(
            <YouTube
               videoId={this.props.id}
               opts={opts}
               onStateChange={this.videoStateChange}
-              className="img-fluid"
+              className="yt-fluid"
             />
      );
   }   

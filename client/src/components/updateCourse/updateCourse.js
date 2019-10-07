@@ -1,19 +1,28 @@
 import React,{ Component } from "react";
-import  { Redirect } from 'react-router-dom';
-import {withRouter} from 'react-router-dom';
+import  { Redirect,withRouter } from 'react-router-dom';
 import {Form,Button,Spinner} from 'react-bootstrap';
-import axios, { post } from 'axios';
 import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
 
-class Create extends Component {
+
+class UpdateCourse extends Component {
   constructor() {
     super();
     this.state = {
         title:'',
         image:'',
-        details:''
+        details:'',
+        course:null
    }
+  }
+
+  componentDidMount(){
+    if(this.props.loggedIn){
+        let courseDetails = this.props.location.state.detail;
+        this.setState({course:courseDetails,title:courseDetails.title,image:courseDetails.image,details:courseDetails.details},()=>{
+           console.log(this.state);
+        });
+    }
   }
   
   onChangeHandler = (e) => {
@@ -27,24 +36,25 @@ class Create extends Component {
         console.log(this.props);
       })
   }
-  
-  onSubmitHandler = async (e) =>{
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('image',this.state.image);
-    formData.append('title',this.state.title);
-    formData.append('details',this.state.details);
-    this.props.addCourse(formData);
-  }
 
   async componentDidUpdate(){
-    if(localStorage.getItem('addedCourse')){
+    if(localStorage.getItem('updatedCourse')){
       if(this.props.courses){
         this.props.history.push({
               pathname: '/courses'
         });
       }
     }
+  }
+
+  onSubmitHandler = (e) =>{
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('image',this.state.image);
+    formData.append('_id',this.state.course._id);
+    formData.append('title',this.state.title);
+    formData.append('details',this.state.details);
+    this.props.editCourse(formData);
   }
 
   render() {
@@ -60,7 +70,7 @@ class Create extends Component {
         <form onSubmit={this.onSubmitHandler}>
                       
                         <div className="form-label-group">
-                          <input onChange={this.onChangeHandler} type="text" id="title" className="form-control" placeholder="Enter Course Title" required autofocus/>
+                          <input value={this.state.title} onChange={this.onChangeHandler} type="text" id="title" className="form-control" placeholder="Enter Course Title" required autofocus/>
                           <label for="title">Course Title</label>
                         </div>
    
@@ -71,7 +81,7 @@ class Create extends Component {
                        </div>
                       
                         <div className="form-label-group">
-                           <textarea placeholder="Course Details" style={{'height':'200px'}}  onChange={this.onChangeHandler} type="textarea" id="details" className="form-control extraquestion" required autofocus/>
+                           <textarea value={this.state.details} placeholder="Course Details" style={{'height':'200px'}}  onChange={this.onChangeHandler} type="textarea" id="details" className="form-control extraquestion" required autofocus/>
                            
                        </div>
                       
@@ -88,7 +98,7 @@ class Create extends Component {
                 <div className="container">
                   <div className="row">
                     <div className="col-md-9 col-lg-8 mx-auto">
-                      <h3 className="login-heading mb-4">Add Course</h3>
+                      <h3 className="login-heading mb-4">Edit Course</h3>
                         {baseComp}
                     </div>
                   </div>
@@ -101,20 +111,17 @@ class Create extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch =>{
   return{
-    addCourse: (formData)=>dispatch(actions.addCourses(formData)),
-    fetchCourses:()=>dispatch(actions.fetchCourses())
+    editCourse: (formData)=>dispatch(actions.updateCourse(formData)),
   }
 }
 const mapStateToProps = state =>{
   console.log(state);
   return{
-    addedCourse:state.course.addedCourse,
     loading:state.course.loading,
     courses:state.course.courses
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Create));
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(UpdateCourse));
 

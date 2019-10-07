@@ -5,25 +5,35 @@ import axios from '../../axios';
 import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
 
-class AddLinks extends Component {
+class UpdateLink extends Component {
    state = {
         course:null,
+        linkObj:null,
         link:'',
         title:'',
-        type:''
+        type:'',
+        isVideo:false,
+        isDoc:false
    }
   
  componentDidMount(){
     if(this.props.loggedIn){
-        let courseDetails = this.props.location.state.detail;
-        this.setState({course:courseDetails},()=>{
+        let sendObj = this.props.location.state.detail;
+        console.log('sendObj');
+        console.log(sendObj);
+        if(sendObj.linkData.types === 'video'){
+          this.setState({isVideo:true});
+        }else{
+          this.setState({isDoc:true});
+        }
+        this.setState({course:sendObj.courseData,linkObj:sendObj.linkData,link:sendObj.linkData.link,title:sendObj.linkData.title,type:sendObj.linkData.types},()=>{
            console.log(this.state);
         });
     }
   }
 
   async componentDidUpdate(){
-    if(localStorage.getItem('addedCourseContent')){
+    if(localStorage.getItem('updatedCourseContent')){
       if(this.props.courses){
         this.props.history.push({
               pathname: '/courses'
@@ -43,10 +53,10 @@ class AddLinks extends Component {
       const formData = {
        link:this.state.link,
        title:this.state.title,
-       course:this.state.course,
-       type:this.state.type
+       type:this.state.type,
+       id:this.state.linkObj._id
     }
-    this.props.addCoursesContent(formData);
+    this.props.updateCoursesContent(formData,this.state.course);
   
   }
 
@@ -63,20 +73,20 @@ class AddLinks extends Component {
         <form onSubmit={this.onSubmitHandler}>
                       
                         <div className="form-label-group">
-                          <input onChange={this.onChangeHandler} type="text" id="title" className="form-control" placeholder="Enter Link Title" required autofocus/>
+                          <input value={this.state.title} onChange={this.onChangeHandler} type="text" id="title" className="form-control" placeholder="Enter Link Title" required autofocus/>
                           <label for="title">Title</label>
                         </div>
  
                          <div className="form-group">
                           <select onChange={this.onChangeHandler} id="type" className="form-control extra" required autofocus>
                                <option disabled selected>Select Type</option>
-                               <option value="video">video</option>
-                               <option value="document">document</option>
+                               <option value="video" selected ={this.state.isVideo}>video</option>
+                               <option value="document" selected ={this.state.isDoc}>document</option>
                           </select>
                         </div>
 
                          <div className="form-label-group">
-                          <input onChange={this.onChangeHandler} type="text" id="link" className="form-control" placeholder="Enter Link" required autofocus/>
+                          <input value={this.state.link} onChange={this.onChangeHandler} type="text" id="link" className="form-control" placeholder="Enter Link" required autofocus/>
                           <label for="link">Link</label>
                         </div>
    
@@ -95,7 +105,7 @@ class AddLinks extends Component {
                 <div className="container">
                   <div className="row">
                     <div className="col-md-9 col-lg-8 mx-auto">
-                      <h3 className="login-heading mb-4">Add Links</h3>
+                      <h3 className="login-heading mb-4">Update Link</h3>
                         {baseComp}
                     </div>
                   </div>
@@ -111,7 +121,7 @@ class AddLinks extends Component {
 
 const mapDispatchToProps = dispatch =>{
   return{
-    addCoursesContent: (formData)=>dispatch(actions.addCoursesContent(formData)),
+    updateCoursesContent: (formData,course)=>dispatch(actions.updateCoursesContent(formData,course)),
   }
 }
 const mapStateToProps = state =>{
@@ -121,7 +131,7 @@ const mapStateToProps = state =>{
     courses:state.course.courses
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(AddLinks));
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(UpdateLink));
 
 
 

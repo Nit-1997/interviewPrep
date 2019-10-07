@@ -25,23 +25,20 @@ class QuestionList extends Component {
  
  componentDidMount(){
     if(this.props.loggedIn){
-     // await this.setState({loading:true});
-     // await this.props.fetchQues(this.props.user.username); 
-     // await this.setState({loading:false});
          console.log('comp did mount');
          let quesData = JSON.parse(localStorage.getItem('quesData'));
+         if(localStorage.getItem('addedQuestion')){
+            localStorage.removeItem('addedQuestion')
+         }
          console.log(quesData);
          if(quesData){
-                 let allQues = [...quesData.allQuestions];
+                let allQues = [...quesData.allQuestions];
                 this.setState({questions:allQues});
                 let easyQues = [];
                 let hardQues = [];
                 let mediumQues = [];
                 const hashMap = new HashMap();
-               // hashMap.set('Wake Me Up', 'Avicii');
-               // console.log(hashMap.get('Wake Me Up'));
-
-                for(let j=0;j<allQues.length;j++){
+              for(let j=0;j<allQues.length;j++){
                   allQues[j].solved = false;
                   allQues[j].quesColor = 'red';
                 }
@@ -55,8 +52,7 @@ class QuestionList extends Component {
                   if(allQues[j].difficulty === "hard"){
                     hardQues.push(allQues[j]);
                   }
-                }
-                
+                }  
                 for(let i=0;i<quesData.solvedQuestions.length;i++){
                   hashMap.set(quesData.solvedQuestions[i].id,quesData.solvedQuestions[i].id);
                 }
@@ -70,16 +66,6 @@ class QuestionList extends Component {
                     allQues[j].quesColor = 'green'; 
                   }
                 }
-
-
-                // for(let i=0;i<this.props.solvedQuestions.length;i++){
-                //   for(let j=0;j<allQues.length;j++){
-                //     if(allQues[j]._id === this.props.solvedQuestions[i].id){
-                //       allQues[j].solved = true;
-                //       allQues[j].quesColor = 'green';
-                //     }
-                //   }
-                // }
                  this.setState({questions:allQues,easyQues:easyQues,mediumQues:mediumQues,hardQues:hardQues,allQues:allQues},()=>{
                   console.log(this.state);
                 });
@@ -101,10 +87,7 @@ class QuestionList extends Component {
                 let hardQues = [];
                 let mediumQues = [];
                 const hashMap = new HashMap();
-               // hashMap.set('Wake Me Up', 'Avicii');
-               // console.log(hashMap.get('Wake Me Up'));
-
-                for(let j=0;j<allQues.length;j++){
+              for(let j=0;j<allQues.length;j++){
                   allQues[j].solved = false;
                   allQues[j].quesColor = 'red';
                 }
@@ -118,8 +101,7 @@ class QuestionList extends Component {
                   if(allQues[j].difficulty === "hard"){
                     hardQues.push(allQues[j]);
                   }
-                }
-                
+                }  
                 for(let i=0;i<quesData.solvedQuestions.length;i++){
                   hashMap.set(quesData.solvedQuestions[i].id,quesData.solvedQuestions[i].id);
                 }
@@ -133,16 +115,6 @@ class QuestionList extends Component {
                     allQues[j].quesColor = 'green'; 
                   }
                 }
-
-
-                // for(let i=0;i<this.props.solvedQuestions.length;i++){
-                //   for(let j=0;j<allQues.length;j++){
-                //     if(allQues[j]._id === this.props.solvedQuestions[i].id){
-                //       allQues[j].solved = true;
-                //       allQues[j].quesColor = 'green';
-                //     }
-                //   }
-                // }
                 this.setState({questions:allQues,easyQues:easyQues,mediumQues:mediumQues,hardQues:hardQues,allQues:allQues},()=>{
                   console.log(this.state);
                 });

@@ -52,3 +52,41 @@ export const fetchQuestions = (username) =>{
     dispatch(quesSuccess(questions));
 	};
 }
+
+
+export const addQuesStart = () =>{
+  return {
+    type:actionTypes.ADD_QUES_START
+  };
+};
+
+export const addQuesSuccess = (question) =>{
+  return {
+    type:actionTypes.ADD_QUES_SUCCESS,
+    questions:question
+  };
+};
+
+export const addQuesFailure = (error) =>{
+  return {
+    type:actionTypes.ADD_QUES_FAIL,
+    error:error
+  };
+};
+
+export const addQuestions = (formData,username) =>{
+  return async dispatch =>{
+    dispatch(addQuesStart());
+    let url = baseurl+'/createQuestion';
+    axios.post(url,formData)
+            .then(response=>{
+               localStorage.removeItem('quesData');
+               dispatch(fetchQuestions(username));
+               localStorage.setItem('addedQuestion',  JSON.stringify(response.data));
+               dispatch(addQuesSuccess(response.data));
+             })
+            .catch(function (error) {
+              console.log(error);
+            });
+  };
+}

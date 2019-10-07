@@ -713,6 +713,11 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
     width: -webkit-fill-available;
 }
 
+.yt-fluid {
+    max-width: 100%;
+    width: -webkit-fill-available;
+}
+
 .btn-primary {
     background-color: #b59102;
     border-color: #b59102;

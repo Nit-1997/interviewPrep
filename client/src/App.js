@@ -12,6 +12,8 @@ import Code from './containers/code/code';
 import Create from './containers/create/create';
 import Header from './components/header/header';
 import AddLinks from './components/addlinks/addlinks';
+import UpdateLink from './components/updatelink/updatelink';
+import UpdateCourse from './components/updateCourse/updateCourse';
 import CourseDetails from './components/courseDetails/courseDetails';
 import AddComment from './containers/addcomment/addcomment';
 import AddQuestion from './containers/addquestion/addquestion';
@@ -35,8 +37,6 @@ class App extends Component {
     if(this.props.loggedIn){
       this.props.fetchQues(this.props.user.username);
       this.props.fetchCourses();
-      console.log(this.props.solvedQuestions);
-      console.log(this.props.questions);
     }
     this.props.onTryAutoSignIn();
   }
@@ -44,13 +44,11 @@ class App extends Component {
   async componentDidUpdate(){
     if(this.props.loggedIn){
       if(!localStorage.getItem('quesData')){
-        await this.props.fetchQues(this.props.user.username);
+        await this.props.fetchQues(this.props.user.username);  
+      }
+      if(!localStorage.getItem('courseData')){
         await this.props.fetchCourses();   
       }
-      //  await this.props.fetchQues(this.props.user.username);
-      //  await this.props.fetchCourses();
-      //  console.log(this.props.solvedQuestions);
-      // console.log(this.props.questions);
     }
   }
 
@@ -76,8 +74,10 @@ class App extends Component {
                             <Route path="/courses" render={() => <Courses loggedIn={this.props.loggedIn}/>}/>
                             <Route path="/createCourse"  render={() => <Create loggedIn = {this.props.loggedIn}/>} />
                             <Route path="/singleCourse" render={() => <CourseDetails username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/updateCourse" render={() => <UpdateCourse username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
                             <Route path="/addcomment" render={() => <AddComment username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
                             <Route path="/addLinks" render={() => <AddLinks username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
+                            <Route path="/updateLink" render={() => <UpdateLink username={this.props.user.username} loggedIn={this.props.loggedIn}/>}/>
                             <Redirect to="/" />
                       </Switch>
                     );
@@ -148,7 +148,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch =>{
   return{
     fetchQues: (username)=>dispatch(actions.fetchQuestions(username)),
-    fetchCourses:(username)=>dispatch(actions.fetchCourses()),
+    fetchCourses:()=>dispatch(actions.fetchCourses()),
     onTryAutoSignIn: () => dispatch( actions.authCheckState() )
   }
 }

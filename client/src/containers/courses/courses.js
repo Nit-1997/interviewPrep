@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-import { Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
+import { Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image,Spinner} from 'react-bootstrap';
 import Course from '../../components/course/course';
 import './courses.css';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
@@ -11,45 +11,59 @@ import {connect} from 'react-redux';
 
 class Courses extends Component {
  state = {
-    courses:[],
- 	  isLoggedIn:this.props.loggedIn
+    courses:[]
   }
   componentDidMount(){
-  // axios.get('/getCourses')
-  //   .then(response => {
-  //     this.setState({courses:response.data},()=>{
-  //       console.log(this.state);
-  //     });
-  //   })
-  //   .catch(error => {
-  //        console.log(error);
-  //   });
-   this.setState({courses:this.props.courses});
+    if(this.props.loggedIn){
+      let courseData = JSON.parse(localStorage.getItem('courseData'));
+      if(localStorage.getItem('addedCourse')){
+        localStorage.removeItem('addedCourse')
+      }
+      if(localStorage.getItem('deleteCourseContent')){
+        localStorage.removeItem('deleteCourseContent')
+      }
+      if(localStorage.getItem('updatedCourseContent')){
+        localStorage.removeItem('updatedCourseContent')
+      }
+      if(localStorage.getItem('addedCourseContent')){
+        localStorage.removeItem('addedCourseContent');
+      }
+      if(localStorage.getItem('updatedCourse')){
+        localStorage.removeItem('updatedCourse');
+      }
+      if(localStorage.getItem('deletedCourse')){
+        localStorage.removeItem('deletedCourse');
+      }
+      if(courseData){
+       this.setState({courses:courseData});
+      }
+    }
   }
 
   componentDidUpdate(){
-      if(this.state.isLoggedIn !== this.props.loggedIn){
-         this.setState({isLoggedIn:this.props.loggedIn},()=>{
-           console.log(this.state);
-        });
+     if(this.state.courses.length === 0){
+      let courseData = JSON.parse(localStorage.getItem('courseData'));
+      if(courseData){
+       this.setState({courses:courseData});
       }
+     }
   }
 
   render() {
   	let baseComponent;
-    if(this.state.isLoggedIn){
+    if(this.state.courses.length === 0){
       baseComponent=(
-          this.state.courses.map(course =>(
-            <Course courseObj={course}/>
-          ))
+           <div style={{'text-align':'center'}}>
+                   <Spinner  style={{'height':'100px','width':'100px'}} animation="border"/>     
+           </div>
       );
-    }else{
-       baseComponent=(
-                <div className="col-lg-12 text-center">
-                  <h2 className="section-heading text-uppercase">404 planet not found!!!</h2>
-                </div>
-       );
     }
+    let cards =(
+                this.state.courses.map(course =>(
+                    <Course courseObj={course}/>
+                  ))
+       );
+    
     return (
         <section className="bg-light page-section" id="portfolio">
             <div className="container">
@@ -59,8 +73,9 @@ class Courses extends Component {
                   <h3 className="section-subheading text-muted">Best courses for those best jobs.</h3>
                 </div>
                </div>
+               {baseComponent}
                <div class="row">
-                {baseComponent}
+                {cards}
                </div>
              </div>
         </section>

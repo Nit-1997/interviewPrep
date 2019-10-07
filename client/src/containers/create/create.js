@@ -1,4 +1,3 @@
-import './create.css';
 import React from 'react';
 import Register from '../../components/create/create';
 import {withRouter} from 'react-router-dom';
