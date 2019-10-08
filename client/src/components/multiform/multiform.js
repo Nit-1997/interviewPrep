@@ -1,9 +1,11 @@
 import React,{ Component } from "react";
-import  { Redirect } from 'react-router-dom'
-import {Form,Button,Toast,Pagination,Modal} from 'react-bootstrap';
+import  { Redirect,withRouter} from 'react-router-dom'
+import {Form,Button,Toast,Pagination,Modal,Spinner} from 'react-bootstrap';
 import ErrorImg from '../../assets/error.png';
 import axios from 'axios';
 import './multiform.css';
+import * as actions from '../../store/actions/index';
+import {connect} from 'react-redux';
 
 class MultiForm extends Component {
   constructor() {
@@ -259,16 +261,20 @@ class MultiForm extends Component {
           difficulty   : this.state.difficulty
         }
         console.log(question);
-          axios.post('/createQuestion',question)
-            .then(response=>{
-               console.log(response);       
-             })
-            .catch(function (error) {
-              console.log(error);
-            });
+        this.props.addQuestions(question,this.props.username);
      }
   }
  
+  async componentDidUpdate(){
+    if(localStorage.getItem('addedQuestion')){
+      if(this.props.questions){
+        this.props.history.push({
+              pathname: '/questions'
+        });
+      }
+    }
+  }
+
   handleClose = () => {
         this.setState({show:false,disableSubmit:false});
   }
@@ -451,6 +457,21 @@ class MultiForm extends Component {
                     </div>   
                   )
     }
+
+    let finalComp;
+    if(this.props.loading){
+       finalComp = (
+           <div style={{'text-align':'center'}}>
+                   <Spinner  style={{'height':'100px','width':'100px'}} animation="border"/>         
+           </div>
+       );
+    }else{
+      finalComp = (
+          <div>
+            {basecomp}
+          </div>
+      );
+    }
     
     return (
       <div>
@@ -484,11 +505,24 @@ class MultiForm extends Component {
             </Pagination.Item>
          </Pagination> 
          <form onSubmit={this.onSubmitHandler}> 
-             {basecomp}            
+            {finalComp}            
          </form>
      </div>
     );
   }
 }
 
-export default MultiForm;
+const mapDispatchToProps = dispatch =>{
+  return{
+    addQuestions: (formData,username)=>dispatch(actions.addQuestions(formData,username))
+  }
+}
+const mapStateToProps = state =>{
+  console.log(state);
+  return{
+    loading:state.ques.loading,
+    questions:state.ques.questions,
+    username :state.auth.user.username
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(MultiForm));

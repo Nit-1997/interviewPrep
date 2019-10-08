@@ -6,9 +6,16 @@ export {
 } from './auth';
 
 export {
-  fetchQuestions
+  fetchQuestions,
+  addQuestions
 } from './questions';
 
 export {
-  fetchCourses
+  fetchCourses,
+  addCourses,
+  updateCourse,
+  addCoursesContent,
+  updateCoursesContent,
+  deleteCoursesContent,
+  deleteCourses
 } from './courses';

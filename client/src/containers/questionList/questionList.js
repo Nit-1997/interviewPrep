@@ -7,7 +7,7 @@ import Cookies from 'universal-cookie';
 import QuesCard from '../../components/quesCard/quesCard';
 import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
-
+import HashMap from '../../utils/hashmaps';
 
 class QuestionList extends Component {
   constructor() {
@@ -23,50 +23,103 @@ class QuestionList extends Component {
   }
 
  
-  async componentDidMount(){
+ componentDidMount(){
     if(this.props.loggedIn){
-      await this.setState({loading:true});
-      await this.props.fetchQues(this.props.user.username); 
-      await this.setState({loading:false});
-         console.log(this.props.questions);
-         let allQues = [...this.props.questions];
-          this.setState({questions:allQues});
-          let easyQues = [];
-          let hardQues = [];
-          let mediumQues = [];
-          for(let j=0;j<allQues.length;j++){
-            allQues[j].solved = false;
-            allQues[j].quesColor = 'red';
-          }
-          for(let j=0;j<allQues.length;j++){
-            if(allQues[j].difficulty === "easy"){
-              easyQues.push(allQues[j]);
-            }
-            if(allQues[j].difficulty === "medium"){
-              mediumQues.push(allQues[j]); 
-            }
-            if(allQues[j].difficulty === "hard"){
-              hardQues.push(allQues[j]);
-            }
-          }
-          for(let i=0;i<this.props.solvedQuestions.length;i++){
-            for(let j=0;j<allQues.length;j++){
-              if(allQues[j]._id === this.props.solvedQuestions[i].id){
-                allQues[j].solved = true;
-                allQues[j].quesColor = 'green';
-              }
-            }
-          }
-          await this.setState({questions:allQues,easyQues:easyQues,mediumQues:mediumQues,hardQues:hardQues,allQues:allQues},()=>{
-            console.log(this.state);
-          }); 
+         console.log('comp did mount');
+         let quesData = JSON.parse(localStorage.getItem('quesData'));
+         if(localStorage.getItem('addedQuestion')){
+            localStorage.removeItem('addedQuestion')
+         }
+         console.log(quesData);
+         if(quesData){
+                let allQues = [...quesData.allQuestions];
+                this.setState({questions:allQues});
+                let easyQues = [];
+                let hardQues = [];
+                let mediumQues = [];
+                const hashMap = new HashMap();
+              for(let j=0;j<allQues.length;j++){
+                  allQues[j].solved = false;
+                  allQues[j].quesColor = 'red';
+                }
+                for(let j=0;j<allQues.length;j++){
+                  if(allQues[j].difficulty === "easy"){
+                    easyQues.push(allQues[j]);
+                  }
+                  if(allQues[j].difficulty === "medium"){
+                    mediumQues.push(allQues[j]); 
+                  }
+                  if(allQues[j].difficulty === "hard"){
+                    hardQues.push(allQues[j]);
+                  }
+                }  
+                for(let i=0;i<quesData.solvedQuestions.length;i++){
+                  hashMap.set(quesData.solvedQuestions[i].id,quesData.solvedQuestions[i].id);
+                }
+                for(let j=0;j<allQues.length;j++){
+                  if(hashMap.has(allQues[j]._id)){
+                    allQues[j].solved = true;
+                    allQues[j].quesColor = 'green';
+                  }
+                  if(localStorage.getItem(allQues[j]._id)){
+                    allQues[j].solved = true;
+                    allQues[j].quesColor = 'green'; 
+                  }
+                }
+                 this.setState({questions:allQues,easyQues:easyQues,mediumQues:mediumQues,hardQues:hardQues,allQues:allQues},()=>{
+                  console.log(this.state);
+                });
+         }  
     }  
   }
 
 
 
   componentDidUpdate(){
-   
+    if(this.state.questions.length === 0&&this.state.easyQues.length === 0&&this.state.mediumQues.length === 0&&this.state.hardQues.length === 0){
+       console.log('comp did update');
+         let quesData = JSON.parse(localStorage.getItem('quesData'));
+         console.log(quesData);
+         if(quesData){
+                 let allQues = [...quesData.allQuestions];
+                this.setState({questions:allQues});
+                let easyQues = [];
+                let hardQues = [];
+                let mediumQues = [];
+                const hashMap = new HashMap();
+              for(let j=0;j<allQues.length;j++){
+                  allQues[j].solved = false;
+                  allQues[j].quesColor = 'red';
+                }
+                for(let j=0;j<allQues.length;j++){
+                  if(allQues[j].difficulty === "easy"){
+                    easyQues.push(allQues[j]);
+                  }
+                  if(allQues[j].difficulty === "medium"){
+                    mediumQues.push(allQues[j]); 
+                  }
+                  if(allQues[j].difficulty === "hard"){
+                    hardQues.push(allQues[j]);
+                  }
+                }  
+                for(let i=0;i<quesData.solvedQuestions.length;i++){
+                  hashMap.set(quesData.solvedQuestions[i].id,quesData.solvedQuestions[i].id);
+                }
+                for(let j=0;j<allQues.length;j++){
+                  if(hashMap.has(allQues[j]._id)){
+                    allQues[j].solved = true;
+                    allQues[j].quesColor = 'green';
+                  }
+                  if(localStorage.getItem(allQues[j]._id)){
+                    allQues[j].solved = true;
+                    allQues[j].quesColor = 'green'; 
+                  }
+                }
+                this.setState({questions:allQues,easyQues:easyQues,mediumQues:mediumQues,hardQues:hardQues,allQues:allQues},()=>{
+                  console.log(this.state);
+                });
+         }  
+    }
   }
  
   difficultySorter = (e) =>{
@@ -74,6 +127,7 @@ class QuestionList extends Component {
        let easy = [...this.state.easyQues];
        this.setState({questions:easy})
      }else if(e.target.value === "medium"){
+      console.log('medium clicked');
        let medium = [...this.state.mediumQues];
        this.setState({questions:medium})
      }else if(e.target.value === "hard"){
@@ -88,7 +142,7 @@ class QuestionList extends Component {
 
   render() {
     let baseComponent;
-    if(this.state.loading){
+    if(this.state.questions.length === 0&&this.state.easyQues.length === 0&&this.state.mediumQues.length === 0&&this.state.hardQues.length === 0){
       baseComponent=(
           <div style={{'text-align':'center'}}>
                    <Spinner  style={{'height':'100px','width':'100px'}} animation="border"/>     
@@ -134,11 +188,12 @@ class QuestionList extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch =>{
-  return{
-    fetchQues: (username)=>dispatch(actions.fetchQuestions(username))
-  }
-}
+
+// const mapDispatchToProps = dispatch =>{
+//   return{
+//     fetchQues: (username)=>dispatch(actions.fetchQuestions(username))
+//   }
+// }
 
 const mapStateToProps = state =>{
     console.log(state)
@@ -148,4 +203,4 @@ const mapStateToProps = state =>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(QuestionList));
+export default connect(mapStateToProps)(withRouter(QuestionList));

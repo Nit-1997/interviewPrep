@@ -126,7 +126,9 @@ export const logout = () =>{
 		axios.post(url).then(response => {
           console.log(response.data)
           if (response.status === 200) {
-          	 localStorage.removeItem('token');
+          	 // localStorage.removeItem('token');
+          	 // localStorage.removeItem('quesData');
+          	 localStorage.clear();
              dispatch(logoutSuccess());
           }
         }).catch(error => {

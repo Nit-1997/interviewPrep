@@ -1,11 +1,14 @@
 import React,{Component} from 'react';
-import { Card,Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image} from 'react-bootstrap';
+import { Card,Alert,Button,Navbar,Nav,NavDropdown,Col,Container,Row,Image,Spinner} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
 import './courseDetails.css';
 import Comp from '../../containers/viewcomp/viewcomp';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import axios from '../../axios';
+import * as actions from '../../store/actions/index';
+import {connect} from 'react-redux';
 
 class CourseDetails extends Component{
    state = {
@@ -48,22 +51,99 @@ class CourseDetails extends Component{
      });        
   }
 
+  editcoursehandler = (event) =>{
+   this.props.history.push({
+                        pathname: '/updateCourse',
+                        state: { detail: this.state.course }
+     });        
+  }
+
+  editLinkHandler = (link) =>{
+   console.log(link);
+   console.log(this.state.course);
+   let sendObj = {
+     linkData : link,
+     courseData : this.state.course
+   }
+   this.props.history.push({
+                        pathname: '/updateLink',
+                        state: { detail: sendObj }
+   });        
+  }
+
+  deleteLinkHandler = (link) =>{
+   let formData = {
+      linkData: link,
+      courseData:this.state.course
+   }
+   this.props.deleteCoursesContent(formData);
+  }
+
+  delteCourseHandler = () =>{
+    this.props.deleteCourse(this.state.course);
+  }
+
+  async componentDidUpdate(){
+    if(localStorage.getItem('deleteCourseContent')){
+      if(this.props.courses){
+        this.props.history.push({
+              pathname: '/courses'
+        });
+      }
+    }
+    if(localStorage.getItem('deletedCourse')){
+      if(this.props.courses){
+        this.props.history.push({
+              pathname: '/courses'
+        });
+      }
+    }
+  }
+
   render(){
     let baseComponent;
-    if(this.state.isLoggedIn){
+    if(this.props.loading){
+      baseComponent = (
+         <div style={{'text-align':'center'}}>
+                   <Spinner  style={{'height':'100px','width':'100px'}} animation="border"/>         
+           </div>
+      )
+    }else{
+      if(this.state.isLoggedIn){
       if(this.state.links && this.state.links.length){
-        baseComponent=(
-          this.state.links.map(link =>(
-              <div className="col-md-4 col-sm-6 portfolio-item">
-                    <a>
-                      <Comp link = {link}/>
-                    </a>
-                    <div className="portfolio-caption">
-                      <h4>{link.title}</h4>
-                   </div>
-              </div> 
-          ))
-        );
+        if(this.props.username === 'ntnbhat9@gmail.com'){
+             baseComponent=(
+                  this.state.links.map(link =>(
+                      <div className="col-md-4 col-sm-6 portfolio-item">
+                            <a>
+                              <Comp link = {link}/>
+                            </a>
+                            <div className="portfolio-caption">
+                              <h4>{link.title}</h4>
+                              <div>
+                                 <br/> <br/>
+                                 <button class="btn btn-warning" onClick={() => this.editLinkHandler(link)}>Edit Link</button>
+                                 
+                                 <button class="btn btn-danger" onClick={() => this.deleteLinkHandler(link)}>Delete Link</button>
+                              </div>
+                           </div>
+                      </div> 
+                  ))
+                );
+        }else{
+             baseComponent=(
+                  this.state.links.map(link =>(
+                      <div className="col-md-4 col-sm-6 portfolio-item">
+                            <a>
+                              <Comp link = {link}/>
+                            </a>
+                            <div className="portfolio-caption">
+                              <h4>{link.title}</h4>
+                           </div>
+                      </div> 
+                  ))
+                );
+        }
       }
     }else{
        baseComponent=(
@@ -71,14 +151,21 @@ class CourseDetails extends Component{
                   <h2 className="section-heading text-uppercase">404 planet not found!!!</h2>
            </div>
        );
+    }  
     }
+    
     
     let button;
     if(this.props.loggedIn){
       if(this.props.username === "ntnbhat9@gmail.com"){
         button = (
             <div>
-               <Button onClick={this.onclickhandler}>Add Link</Button>
+               <button className="btn btn-info" onClick={this.onclickhandler}>Add Link</button>
+      
+               <button className="btn btn-warning" onClick={this.editcoursehandler}>Edit Course</button>
+           
+               <button className="btn btn-danger" onClick={this.delteCourseHandler}>Delete Course</button>
+               <br/>
                <br/>
                <br/>
             </div>
@@ -104,6 +191,18 @@ class CourseDetails extends Component{
   }   
 }
    
+const mapDispatchToProps = dispatch =>{
+  return{
+    deleteCoursesContent: (formData)=>dispatch(actions.deleteCoursesContent(formData)),
+    deleteCourse: (formData)=>dispatch(actions.deleteCourses(formData))
+  }
+}
+const mapStateToProps = state =>{
+  console.log(state);
+  return{
+    loading:state.course.loading,
+    courses:state.course.courses
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(CourseDetails));
 
-
-export default withRouter(CourseDetails);
