@@ -6,7 +6,7 @@ var  express        = require("express")
    , bodyParser     = require("body-parser");
 
 const path = require("path");
-mongoose.connect('mongodb://nitin:nitin1979@ds159574.mlab.com:59574/prepzone');
+mongoose.connect('mongodb+srv://ntnbhat9:Nit@1979@cluster0.max4jrk.mongodb.net/?retryWrites=true&w=majority');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json({limit: "50mb"}));
