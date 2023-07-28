@@ -51,5 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:7000"
+  "proxy": "https://prepzone-c127c4b5869a.herokuapp.com"
 }
