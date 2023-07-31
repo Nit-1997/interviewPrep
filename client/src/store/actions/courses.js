@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import {baseurl} from '../../constants';
+// import {baseurl} from '../../constants';
+
+const baseurl = 'https://prepzone-c127c4b5869a.herokuapp.com';
 
 export const courseStart = () =>{
 	return {
