@@ -1,9 +1,8 @@
 import axios from 'axios';
+import {baseurl} from './constants';
 
 const instance = axios.create({
-	baseURL : 'http://localhost:7000'
+	baseURL : baseurl
 });
 
 export default instance;
-
-//'https://prepzone.herokuapp.com'

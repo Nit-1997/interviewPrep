@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-
-const baseurl = 'http://localhost:7000';
+import {baseurl} from './constants';
 
 export const quesStart = () =>{
 	return {
