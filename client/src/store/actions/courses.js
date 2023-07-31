@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import {baseurl} from './constants';
+import {baseurl} from '../../constants';
 
 export const courseStart = () =>{
 	return {
