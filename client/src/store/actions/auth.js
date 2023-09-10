@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 // import {baseurl} from '../../constants';
 
-const baseurl = 'https://prepzone-c127c4b5869a.herokuapp.com';
+const baseurl = 'https://prepzone-backend-svc.onrender.com';
 export const signupStart = () => {
     return {
         type: actionTypes.SIGNUP_START

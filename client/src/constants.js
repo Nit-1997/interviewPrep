@@ -1,5 +1,5 @@
 const constants = {
-    baseurl: 'https://prepzone-c127c4b5869a.herokuapp.com'
+    baseurl: 'https://prepzone-backend-svc.onrender.com'
 };
 
 export default constants;

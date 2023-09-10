@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb6f3b55-97fc-479c-9d07-ece9bd96bf79" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/actions/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/actions/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/actions/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/actions/courses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/actions/questions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/actions/questions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +59,7 @@
       <option name="presentableId" value="Default" />
       <updated>1690521939813</updated>
       <workItem from="1690521941294" duration="12618000" />
-      <workItem from="1694373062937" duration="567000" />
+      <workItem from="1694373062937" duration="2347000" />
     </task>
     <servers />
   </component>
