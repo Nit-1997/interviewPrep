@@ -24,6 +24,7 @@
     "cloudinary": "^1.14.0",
     "compile-run": "^2.3.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "hackerearth-node": "^2.3.9",
